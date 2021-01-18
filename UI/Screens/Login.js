@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, AsyncStorage } from 'react-native';
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 
-export default class Login extends React.Component {
+
+export default class Login extends Component {
   state={
     email:"",
     password:"" 
   }
-
+  
   render(){
     return (
       <View style={styles.container}>
         <Image
         style={styles.tinyLogo}
-        source={require('./my-icon5.png')}
+        source={require('./Images/my-icon5.png')}
         />
         <View style={styles.inputView} >
           <TextInput  
@@ -24,7 +23,7 @@ export default class Login extends React.Component {
             placeholder="Email" 
             placeholderTextColor="#003f5c"
             onChangeText={(email)=>this.setState({email})}
-             value={this.state.email}
+            value={this.state.email}
             />
         </View>
         <View style={styles.inputView} >
@@ -34,7 +33,7 @@ export default class Login extends React.Component {
             placeholder="Password" 
             placeholderTextColor="#003f5c"
             onChangeText={(password)=>this.setState({password})}
-             value={this.state.password}/>
+            value={this.state.password}/>
         </View>
         <TouchableOpacity
           onPress={this.login}
@@ -47,9 +46,22 @@ export default class Login extends React.Component {
         >
           <Text style={styles.loginTextNew}>Signup</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('CalculateGpaScreen')}
+        >
+          <Text style={styles.loginTextNew}>Calculate GPA</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('CalcTotalHoursScreen')}
+        >
+          <Text style={styles.loginTextNew}>Calculate Total Hours</Text>
+        </TouchableOpacity>
       </View>
     );
   }
+  
   constructor(props){
     super(props)
     this.state={email:'',password:''}

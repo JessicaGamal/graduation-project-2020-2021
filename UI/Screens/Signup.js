@@ -5,13 +5,14 @@ export default class Signup extends Component {
     super(props);
     this.state = {
       formdata: {
-        username: '',
-        email: '',
-        password: ''
+        username: "",
+        email: "",
+        password: ""
       }
     }
   }
   render() {
+
     const {username,email,password}=this.state.formdata;
   
 
@@ -19,7 +20,7 @@ export default class Signup extends Component {
       <View style={styles.container}>
         <Image
           style={styles.tinyLogo}
-          source={require('./my-icon5.png')}
+          source={require('./Images/my-icon5.png')}
         />
         <View style={styles.inputView} >
           <TextInput
@@ -75,10 +76,9 @@ export default class Signup extends Component {
           onPress={this._saveData}
           style={styles.loginBtn}>
           <Text style={styles.loginText}>Sign up</Text>
-          
         </TouchableOpacity>
-  <TouchableOpacity
-        onPress={() => 
+        <TouchableOpacity
+          onPress={() => 
           this.props.navigation.replace('LoginScreen')}>
           <Text style={styles.loginTextNew}>LogIn</Text>
         </TouchableOpacity>
