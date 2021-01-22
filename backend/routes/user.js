@@ -4,8 +4,9 @@ const User = require('../models/User');
 const bcryptjs = require('bcryptjs');
 const user_jwt = require('../middleware/user_jwt');
 const jwt = require('jsonwebtoken');
+const Subject = require('../models/subject');
+const subjectcontroller = require('../controllers/subjectcontroller');
 
- 
 router.get('/register', user_jwt, async(req, res, next) => {
     try {
 
@@ -135,5 +136,36 @@ router.post('/login', async(req, res, next) => {
         })
     }
 });
+/*
+router.get('/subject/all', async(req, res, next) => {
+
+    const subjects = await Subject.find(); 
+    console.log(subjects);
+    res.json(subjects);
+});
+
+
+router.post('/subject/totalhours', async(req, res, next) => {
+
+    //["IS","DB"]
+    const allsubject=req.body;
+    console.log(req.body);
+    let total =0;
+
+  
+    
+    for (var i = 0; i < allsubject.length; i++) {
+        
+        let subject = await Subject.findOne({name:allsubject[i]});
+        if(subject !=null){
+            total += subject.hours;
+        }
+    }
+    
+    res.json(total);
+});
+*/
+router.get('/subject/all',subjectcontroller.getAllsubjects);
+router.post('/subject/totalhours',subjectcontroller.getTotolHours);
 
 module.exports = router;
