@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import CustomMultiPicker from "react-native-multiple-select-list";
 
 export default function App() {
@@ -22,8 +22,10 @@ export default function App() {
     "139":"SW1                                                ",
     "140":"SW2                                                "
   }
+
   return (
     <View style={styles.container}>
+      <ScrollView>
       <CustomMultiPicker
         options={userList}
         search={true} // should show search bar?
@@ -35,22 +37,41 @@ export default function App() {
         rowBackgroundColor={"#eee"}
         rowHeight={40}
         rowRadius={10}
-        iconColor={"#00a2dd"}
+        iconColor={"#53D6BB"}
         iconSize={30}
         selectedIconName={"ios-checkmark-circle-outline"}
         unselectedIconName={"ios-add-circle"}
-        scrollViewHeight={130}
+        scrollViewHeight={300}
         selected={[]} // list of options which are selected by default
       />
+      <View style={styles.button}>
+        <TouchableOpacity
+        //onPress={}
+        >
+          <Text>Calculate Total Hours</Text>
+        </TouchableOpacity>
+      </View>
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex:1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 80
+    paddingTop: 50
   },
+  button: {
+    backgroundColor: '#53D6BB',
+    width:"60%",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:30,
+    marginBottom:10
+  }
 });
