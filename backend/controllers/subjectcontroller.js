@@ -1,5 +1,6 @@
-const express = require('express');
-const Subject = require('../models/subject');
+const { Cursor } = require('mongodb');
+const subject = require('../models/subject');
+var str = "";
 
 
 // get a list of all subjects
@@ -7,10 +8,17 @@ module.exports = {
     getAllsubjects : async (req , res) => {
         try{
             
-            const subjects = await Subject.find(); 
-            //console.log(subjects);
-            res.json(subjects);
+            var allsubject = await subject.find().select('name').select("-_id");
+            console.log(allsubject);
             
+           // res.send(allsubject);
+            res.status(200).json({
+                success: true,
+               
+               
+                subjects: allsubject
+            });
+            console.log(allsubject);
         } catch (error) {
             console.log(error.message);
         }
@@ -22,15 +30,29 @@ module.exports = {
         try{
             for (var i = 0; i < allsubject.length; i++) {
             
-                let subject = await Subject.findOne({name:allsubject[i]});
-                if(subject !=null){
-                    total += subject.hours;
+                let sub = await subject.findOne({name:allsubject[i]});
+                if(sub !=null){
+                    total += sub.hours;
                 }
             }
-            res.json(total);
+           
+
+            res.status(200).json({
+                success: true,
+               
+               
+                total: total
+            });
         } catch (error) {
-            console.log(error.message);
+
+                res.status(500).json({
+                success: false,
+                msg: 'Server Error'
+            })
         }
     }
+
+
+
 };
 

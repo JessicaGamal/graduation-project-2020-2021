@@ -1,56 +1,130 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView,FlatList } from 'react-native';
 import CustomMultiPicker from "react-native-multiple-select-list";
 
-export default function App() {
-  const userList = {
-    "123":"DS                                                ",
-    "124":"Pl                                                ",
-    "125":"Hr                                                ",
-    "127":"PL1                                                ",
-    "128":"CS                                                ",
-    "129":"AI                                                ",
-    "130":"IA                                                ",
-    "131":"Math1                                                ",
-    "132":"Math2                                                ",
-    "133":"English                                                ",
-    "134":"Quality                                                ",
-    "135":"DW                                                ",
-    "136":"Statistics                                                ",
-    "137":"Ethics                                                ",
-    "138":"Security                                                ",
-    "139":"SW1                                                ",
-    "140":"SW2                                                "
+ class CalcTotalHoursScreen extends React.Component  {
+
+   constructor() {
+    super();
+    this.state = {
+
+        viewSubjects: []
+    };
+  } 
+
+   componentDidMount() {
+   
+      this.getData();
+    
   }
-  return (
-    <View style={styles.container}>
+  async getData(){
+
+   let data  = await fetch('http://192.168.1.2:3000/subject/all');
+   let reso = await data.json();
+   var names = reso.subjects.map(function(item) {
+    return item['name'];
+  });
+  
+
+   console.log(Object.assign({},names));
+  
+   this.setState({viewSubjects:names});
+  
+   
+  }
+
+  render(){
+  const ListOfsub = [];
+  
+  
+    return  (
+  
+      <View style={styles.container}>
+      <ScrollView>
       <CustomMultiPicker
-        options={userList}
+        options={Object.assign({},this.state.viewSubjects)}
         search={true} // should show search bar?
         multiple={true} //
         placeholder={"Search"}
         placeholderTextColor={'#757575'}
         returnValue={"label"} // label or value
-        callback={(res)=>{ console.log(res) }} // callback, array of selected items
+        callback={(res)=>{
+          
+          this.ListOfsub =res;
+          console.log(res) }} // callback, array of selected items
         rowBackgroundColor={"#eee"}
         rowHeight={40}
         rowRadius={10}
-        iconColor={"#00a2dd"}
+        iconColor={"#53D6BB"}
         iconSize={30}
         selectedIconName={"ios-checkmark-circle-outline"}
         unselectedIconName={"ios-add-circle"}
-        scrollViewHeight={130}
+        scrollViewHeight={300}
         selected={[]} // list of options which are selected by default
       />
+      
+      </ScrollView>
+      <View style={styles.button}>
+        <TouchableOpacity
+        onPress={this.calculate}
+        >
+          <Text>Calculate Total Hours</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-  );
+      
+   );
+  }
+
+  calculate=()=>{
+    console.log(this.ListOfsub);
+      fetch('http://192.168.1.2:3000/subject/totalhours',{
+      method:'POST',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
+        body:JSON.stringify(this.ListOfsub)
+        
+    })
+    .then(response => { return response.json();})
+    .then(responseData => 
+      
+      {
+        if(responseData){
+          const total = responseData.total;
+          
+          console.log(total); 
+        }
+
+      return responseData;})
+ 
+  }
+
+ 
 }
+  
+
+
 
 const styles = StyleSheet.create({
   container: {
+    flex:1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 80
+    paddingTop: 50
   },
+  button: {
+    backgroundColor: '#53D6BB',
+    width:"60%",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:30,
+    marginBottom:10
+  }
 });
+
+export default CalcTotalHoursScreen;

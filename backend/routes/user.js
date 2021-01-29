@@ -138,20 +138,15 @@ router.post('/login', async(req, res, next) => {
 });
 /*
 router.get('/subject/all', async(req, res, next) => {
-
     const subjects = await Subject.find(); 
     console.log(subjects);
     res.json(subjects);
 });
-
-
 router.post('/subject/totalhours', async(req, res, next) => {
-
     //["IS","DB"]
     const allsubject=req.body;
     console.log(req.body);
     let total =0;
-
   
     
     for (var i = 0; i < allsubject.length; i++) {

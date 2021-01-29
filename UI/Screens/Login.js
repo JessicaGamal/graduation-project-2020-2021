@@ -72,7 +72,7 @@ export default class Login extends Component {
   login=()=>{
         
     
-    fetch('http://192.168.1.9:3000/login',{
+    fetch('http://192.168.1.2:3000/login',{
       method:'POST',
       headers:{
         'Accept':'application/json',
