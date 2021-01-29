@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, TextInput } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, TextInput, ScrollView } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import PickerScreeen from './PickerScreen';
 import CourseNameScreen from './CourseNameScreen';
@@ -21,39 +21,43 @@ export default class CalculateGPA extends Component {
   }
   render() {
     return (
-    <View style={styles.container}>
-       <ImageBackground source={require('./gpa-calculator.jpg')} style={styles.image}>
-       </ImageBackground>
-    
-    <View style={styles.subContainer}>
-        <Table borderStyle={{borderWidth: 2, borderColor: '#A1DED2'}}>
-          <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={this.state.tableData} textStyle={styles.text}/>
-        </Table>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text>+ Add Course</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Current GPA"
-            style={styles.input}
-            />
-          <TextInput
-            placeholder="Total Credits"
-            style={styles.input}
-            />
-          </View>
-          <View style={styles.button}>
-            <TouchableOpacity>
-              <Text>Calculate GPA</Text>
-            </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.container}>
+          <ImageBackground source={require('./gpa-calculator.jpg')} style={styles.backgriundImage}>
+          </ImageBackground>
+        
+          <View style={styles.subContainer}>
+              <Table borderStyle={{borderWidth: 2, borderColor: '#A1DED2'}}>
+                <Row data={this.state.tableHead} style={styles.head} textStyle={styles.text}/>
+                <Rows data={this.state.tableData} textStyle={styles.text}/>
+              </Table>
+              <View style={styles.buttonContainer}>
+                <View style={styles.button}>
+                  <TouchableOpacity>
+                    <Text>+ Add Course</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.inputContainer}>
+                <TextInput
+                  placeholder="Current GPA"
+                  style={styles.input}
+                  />
+                <TextInput
+                  placeholder="Total Credits"
+                  style={styles.input}
+                  />
+                </View>
+                <View style={styles.button}>
+                  <TouchableOpacity
+                  //onPress={}
+                  >
+                    <Text>Calculate GPA</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
           </View>
         </View>
-    </View>
-    </View>
+      </ScrollView>
     );
   }
 }
@@ -63,15 +67,16 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   subContainer: {
+    flex:1,
     padding: 12, 
-    paddingTop: 30, 
+    paddingTop: 50, 
     backgroundColor: '#fff', 
     justifyContent:'center' 
    },
-  image: {
+  backgriundImage: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center"
+    resizeMode: 'stretch',
+    justifyContent: 'center'
   },
   head: {
     height: 40, backgroundColor: '#BFF0E6' 
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
  buttonContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingBottom: 20
+    paddingBottom: 10
  },
  button: {
    backgroundColor: '#BFF0E6',
@@ -91,8 +96,8 @@ const styles = StyleSheet.create({
    height:50,
    alignItems:"center",
    justifyContent:"center",
-   marginTop:30,
-   marginBottom:10
+   marginTop:20,
+   marginBottom:1
  },
  inputContainer: {
   flexDirection: 'row',
