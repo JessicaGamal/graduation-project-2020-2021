@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const bcryptjs = require('bcryptjs');
-const user_jwt = require('../middleware/user_jwt');
+const user_jwt = require('../controllers/user_jwt');
 const jwt = require('jsonwebtoken');
 const Subject = require('../models/subject');
-const subjectcontroller = require('../controllers/subjectcontroller');
+
 
 router.get('/register', user_jwt, async(req, res, next) => {
     try {
@@ -160,7 +160,6 @@ router.post('/subject/totalhours', async(req, res, next) => {
     res.json(total);
 });
 */
-router.get('/subject/all',subjectcontroller.getAllsubjects);
-router.post('/subject/totalhours',subjectcontroller.getTotolHours);
+
 
 module.exports = router;
