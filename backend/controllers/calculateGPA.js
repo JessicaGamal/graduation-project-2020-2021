@@ -2,7 +2,7 @@ module.exports = {
     calculateGPA : async (req, res, next) => {
     var hour ;
     var gpa;
-    var gpa = 0;
+    var GPA = 0;
     var TotalHoures =0;
     var RecentGpa =0;
       var score = req.body.score;
