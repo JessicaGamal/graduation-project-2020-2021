@@ -4,7 +4,7 @@ import CustomMultiPicker from "react-native-multiple-select-list";
 
  class CalcTotalHoursScreen extends React.Component  {
 
-   constructor() {
+  /* constructor() {
     super();
     this.state = {
 
@@ -32,26 +32,42 @@ import CustomMultiPicker from "react-native-multiple-select-list";
   
    
   }
+*/
+
+      userlist ={
+          "123":"DS",
+          "124":"Pl",
+          "125":"Hr",
+          "127":"PL1",
+          "128":"CS",
+          "129":"AI",
+          "130":"IA",
+          "131":"Math1",
+          "132":"Math2",
+          "133":"English",
+          "134":"Quality",
+          "135":"DW",
+          "136":"Statistics                                                ",
+          "137":"Ethics",
+          "138":"Security",
+          "139":"SW1",
+          "140":"SW2"
+      }
 
   render(){
-  const ListOfsub = [];
-  
-  
+  //const ListOfsub = [];
+
     return  (
-  
       <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.scroll}>
       <CustomMultiPicker
-        options={Object.assign({},this.state.viewSubjects)}
+        options={this.userlist}
         search={true} // should show search bar?
         multiple={true} //
         placeholder={"Search"}
         placeholderTextColor={'#757575'}
         returnValue={"label"} // label or value
-        callback={(res)=>{
-          
-          this.ListOfsub =res;
-          console.log(res) }} // callback, array of selected items
+        callback={(res)=>{ console.log(res)}} // callback, array of selected items
         rowBackgroundColor={"#eee"}
         rowHeight={40}
         rowRadius={10}
@@ -59,11 +75,9 @@ import CustomMultiPicker from "react-native-multiple-select-list";
         iconSize={30}
         selectedIconName={"ios-checkmark-circle-outline"}
         unselectedIconName={"ios-add-circle"}
-        scrollViewHeight={300}
+        scrollViewHeight={280}
         selected={[]} // list of options which are selected by default
       />
-      
-      </ScrollView>
       <View style={styles.button}>
         <TouchableOpacity
         onPress={this.calculate}
@@ -71,6 +85,7 @@ import CustomMultiPicker from "react-native-multiple-select-list";
           <Text>Calculate Total Hours</Text>
         </TouchableOpacity>
       </View>
+      </ScrollView>
     </View>
       
    );
@@ -95,6 +110,7 @@ import CustomMultiPicker from "react-native-multiple-select-list";
           const total = responseData.total;
           
           console.log(total); 
+          alert(total)
         }
 
       return responseData;})
@@ -114,6 +130,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 50
+  },
+  scroll: {
+    width:"95%"
   },
   button: {
     backgroundColor: '#53D6BB',
