@@ -4,39 +4,35 @@ import CustomMultiPicker from "react-native-multiple-select-list";
 
  class CalcTotalHoursScreen extends React.Component  {
 
-  /* constructor() {
+   constructor() {
     super();
     this.state = {
-
         viewSubjects: []
     };
   } 
-
    componentDidMount() {
    
       this.getData();
     
   }
   async getData(){
-
    let data  = await fetch('http://192.168.1.2:3000/subject/all');
    let reso = await data.json();
    var names = reso.subjects.map(function(item) {
     return item['name'];
   });
   
-
    console.log(Object.assign({},names));
   
    this.setState({viewSubjects:names});
   
    
   }
-*/
 
-      userlist ={
-          "123":"DS",
-          "124":"Pl",
+
+    /*  userlist ={
+          "123":"Is",
+          "124":"DB1",
           "125":"Hr",
           "127":"PL1",
           "128":"CS",
@@ -52,22 +48,26 @@ import CustomMultiPicker from "react-native-multiple-select-list";
           "138":"Security",
           "139":"SW1",
           "140":"SW2"
-      }
+      }*/
 
   render(){
-  //const ListOfsub = [];
+  const ListOfsub = [];
 
     return  (
       <View style={styles.container}>
       <ScrollView style={styles.scroll}>
       <CustomMultiPicker
-        options={this.userlist}
+       // options={this.userlist}
+       options={Object.assign({},this.state.viewSubjects)}
         search={true} // should show search bar?
         multiple={true} //
         placeholder={"Search"}
         placeholderTextColor={'#757575'}
         returnValue={"label"} // label or value
-        callback={(res)=>{ console.log(res)}} // callback, array of selected items
+        callback={(res)=>{
+          
+          this.ListOfsub =res;
+          console.log(res) }} // callback, array of selected items
         rowBackgroundColor={"#eee"}
         rowHeight={40}
         rowRadius={10}
