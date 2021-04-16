@@ -58,6 +58,18 @@ export default class Login extends Component {
         >
           <Text style={styles.loginTextNew}>Calculate Total Hours</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('ExpertScreen')}
+        >
+          <Text style={styles.loginTextNew}>Expert</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('AddScreen')}
+        >
+          <Text style={styles.loginTextNew}>Add</Text>
+        </TouchableOpacity>
       </View>
     );
   }
