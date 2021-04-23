@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, AsyncStorage } from 'react-native';
+import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button } from 'react-native';
+
+import deviceStorage from '../services/deviceStorage';
+
 import 'react-native-gesture-handler';
 
 
 
-export default class Login extends Component {
+export default
+  class Login extends Component {
   state={
     email:"",
     password:"" 
@@ -58,18 +62,6 @@ export default class Login extends Component {
         >
           <Text style={styles.loginTextNew}>Calculate Total Hours</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-        onPress={() => 
-          this.props.navigation.navigate('ExpertScreen')}
-        >
-          <Text style={styles.loginTextNew}>Expert</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        onPress={() => 
-          this.props.navigation.navigate('AddScreen')}
-        >
-          <Text style={styles.loginTextNew}>Add</Text>
-        </TouchableOpacity>
       </View>
     );
   }
@@ -77,14 +69,16 @@ export default class Login extends Component {
   constructor(props){
     super(props)
     this.state={email:'',password:''}
-
+    device = new deviceStorage();
   }
 
-
+ /* logout=() =>{
+    deviceStorage.removeItem("id_token");
+  }*/
   login=()=>{
         
     
-    fetch('http://192.168.1.2:3000/login',{
+    fetch('http://192.168.1.7:3000/login',{
       method:'POST',
       headers:{
         'Accept':'application/json',
@@ -98,8 +92,13 @@ export default class Login extends Component {
     .then((response)=>response.json())
     .then((res)=>{
       if(res.success ===true){
+
+     
+        device.saveItem("id_token", res.token);
+        console.log(res.token);
+
         var email=res.message;
-        AsyncStorage.setItem('email',email)
+       // AsyncStorage.setItem('email',email)
         alert('You Are Logged In...!')
         this.props.navigation.replace('SignupScreen')
        

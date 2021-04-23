@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView,FlatList } from 'react-native';
 import CustomMultiPicker from "react-native-multiple-select-list";
-
+//import deviceStorage from '../services/deviceStorage';
  class CalcTotalHoursScreen extends React.Component  {
 
    constructor() {
@@ -9,6 +9,7 @@ import CustomMultiPicker from "react-native-multiple-select-list";
     this.state = {
         viewSubjects: []
     };
+   // device = new deviceStorage() ;
   } 
    componentDidMount() {
    
@@ -16,11 +17,11 @@ import CustomMultiPicker from "react-native-multiple-select-list";
     
   }
   async getData(){
-   let data  = await fetch('http://192.168.1.2:3000/subject/all');
+   let data  = await fetch('http://192.168.1.7:3000/subject/all');
    let reso = await data.json();
    var names = reso.subjects.map(function(item) {
     return item['name'];
-  });
+  }); 
   
    console.log(Object.assign({},names));
   
@@ -93,11 +94,12 @@ import CustomMultiPicker from "react-native-multiple-select-list";
 
   calculate=()=>{
     console.log(this.ListOfsub);
-      fetch('http://192.168.1.2:3000/subject/totalhours',{
+      fetch('http://192.168.1.7:3000/subject/totalhours',{
       method:'POST',
       headers:{
         'Accept':'application/json',
-        'Content-Type':'application/json'
+        'Content-Type':'application/json',
+       // 'Authorization' : 'Bearer ' + device.getToken()  
       },
         body:JSON.stringify(this.ListOfsub)
         
