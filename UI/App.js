@@ -8,7 +8,6 @@ import Signup from './Screens/Signup';
 import CalculateGPA from './Screens/CalculateGpa/CalculateGPA';
 import CalcTotalHours from './Screens/CalcTotalHours';
 import Expert from './Screens/Expert';
-import Add from './Screens/Add';
 
 
 export default class App extends React.Component {
@@ -32,7 +31,7 @@ function MyStack() {
               <Stack.Screen  name="CalculateGpaScreen" component={CalculateGPA} />
               <Stack.Screen  name="CalcTotalHoursScreen" component={CalcTotalHours} />
               <Stack.Screen  name="ExpertScreen" component={Expert} />
-              <Stack.Screen  name="AddScreen" component={Add} />
+              
             </Stack.Navigator>
           );
         }

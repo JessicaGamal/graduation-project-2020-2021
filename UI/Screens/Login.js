@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button } from 'react-native';
 
-import deviceStorage from '../services/deviceStorage';
+
 
 import 'react-native-gesture-handler';
 
@@ -62,6 +62,12 @@ export default
         >
           <Text style={styles.loginTextNew}>Calculate Total Hours</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('ExpertScreen')}
+        >
+          <Text style={styles.loginTextNew}>Expert</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -69,12 +75,10 @@ export default
   constructor(props){
     super(props)
     this.state={email:'',password:''}
-    device = new deviceStorage();
+    
   }
 
- /* logout=() =>{
-    deviceStorage.removeItem("id_token");
-  }*/
+
   login=()=>{
         
     
