@@ -68,6 +68,12 @@ export default
         >
           <Text style={styles.loginTextNew}>Expert</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('AddScreen')}
+        >
+          <Text style={styles.loginTextNew}>Addcourse</Text>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -18,6 +18,7 @@ dotenv.config({
 connecttodb();
 app.use('/',require('./routes/user'));
 app.use('/',require('./routes/CalculateGpa&total houres'));
+app.use('/',require('./routes/addlink'));
 
 
 
