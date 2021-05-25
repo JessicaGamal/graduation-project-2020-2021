@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ImageBackground, Text, TouchableOpacity } from 'react-native';
 
+
 let qes = ['Do you like Blue?', 'Do you like Red?', 'Do you like yellow?', 'Do you like green?']
 
 

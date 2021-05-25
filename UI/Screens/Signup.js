@@ -79,7 +79,7 @@ export default class Signup extends Component {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => 
-          this.props.navigation.replace("Login")}>
+          this.props.navigation.replace('LoginScreen')}>
           <Text style={styles.loginTextNew}>LogIn</Text>
         </TouchableOpacity>
   

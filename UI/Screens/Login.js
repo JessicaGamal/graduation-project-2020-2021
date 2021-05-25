@@ -46,11 +46,34 @@ export default
         </TouchableOpacity>
         <TouchableOpacity
         onPress={() => 
-          this.props.navigation.replace("Signup")}
+          this.props.navigation.replace('SignupScreen')}
         >
           <Text style={styles.loginTextNew}>Signup</Text>
         </TouchableOpacity>
-       
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('CalculateGpaScreen')}
+        >
+          <Text style={styles.loginTextNew}>Calculate GPA</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('CalcTotalHoursScreen')}
+        >
+          <Text style={styles.loginTextNew}>Calculate Total Hours</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('ExpertScreen')}
+        >
+          <Text style={styles.loginTextNew}>Expert</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => 
+          this.props.navigation.navigate('AddScreen')}
+        >
+          <Text style={styles.loginTextNew}>Addcourse</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -87,7 +110,7 @@ export default
         var email=res.message;
        // AsyncStorage.setItem('email',email)
         alert('You Are Logged In...!')
-        this.props.navigation.replace("Signup")
+        this.props.navigation.replace('SignupScreen')
        
       }else{
         alert(res.message)
