@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         marginBottom:1
     },
     startButton: {
-        backgroundColor: '#00A786',
+        backgroundColor: '#08A889',
         width:"60%",
         borderRadius:25,
         height:80,
