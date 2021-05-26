@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { StyleSheet,Linking  , View, Image, TouchableOpacity, Text, TextInput,FlatList, ScrollView, TouchableWithoutFeedback, Animated, Easing, LogBox  } from 'react-native';
+import React from 'react';
+import { StyleSheet,Linking  , View, Image, TouchableOpacity, Text, TextInput,FlatList, ScrollView, } from 'react-native';
 import { Rating } from "react-native-rating-element";
 
-export default class AddScreen extends React.Component {
+export default class AiScreen extends React.Component {
  
   state = {
     firstRate: 2,
@@ -29,7 +29,7 @@ render() {
     return (
       <ScrollView style={styles.container}> 
       
-          <Image source={{}} style={styles.backgriundImage}>
+      <Image source={require('./Images/10.jpg')} style={styles.backgriundImage}>
           </Image>
           <View style={styles.Header}>
             <Text style={styles.text}>About Artificial Intelligence Course</Text>    
