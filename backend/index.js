@@ -1,12 +1,14 @@
 const express= require('express')
 const morgan =require('morgan')
 const dotenv = require('dotenv')
+const path = require('path')
+const cors = require('cors')
 const connecttodb =require('./config/db')
-const bodyParser=require('body-parser')
 const app =express()
+dotenv.config();
 
 app.use(morgan('dev'));
-
+app.use(cors())
 app.use(express.json({}));
 app.use(express.json({
     extended:true
@@ -19,7 +21,8 @@ connecttodb();
 app.use('/',require('./routes/user'));
 app.use('/',require('./routes/CalculateGpa&total houres'));
 app.use('/',require('./routes/addlink'));
-
+app.use('/',require('./routes/uploadpdf'));
+app.use('/',require('./routes/expert'));
 
 
 const port = process.env.port ||3000;
