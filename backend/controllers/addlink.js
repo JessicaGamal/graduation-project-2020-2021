@@ -24,7 +24,7 @@ addcourse.save().then
 
        .then(result=>{
            res.status(200).json({
-              data:result
+              data1:results
            })
        }).catch(err=>{
            res.status(200).json({

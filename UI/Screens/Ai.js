@@ -3,8 +3,11 @@ import { StyleSheet, Linking, Image, ActivityIndicator, Button, View, TouchableO
 import * as ImagePicker from "expo-image-picker";
 import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
+import {YellowBox} from 'react-native';
+
 export default class AiScreen extends React.Component {
 
+  
   state = {
     firstRate: 2,
     secondRate: 1,
@@ -104,23 +107,8 @@ export default class AiScreen extends React.Component {
       this.setState({ uploading: false });
     }
   };
-
-  componentDidMount() {
-    fetch('http://192.168.1.4:3000/viewcourse', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json()).
-      then(results => {
-        this.setState({ data1: results.data1 })
-        console.log(results.data1)
-      })
-
-  }
-  componentDidMount() {
-    fetch('http://192.168.1.4:3000/viewimage', {
+ viewcourse=()=> {
+    fetch('http://192.168.1.5:3000/viewimage', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -134,10 +122,31 @@ export default class AiScreen extends React.Component {
 
   }
 
+  viewimage=()=> {
+    fetch('http://192.168.1.5:3000/viewimage', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json()).
+      then(results => {
+        this.setState({ data: results.data })
+        console.log(results.data)
+      })
 
+  }
+
+componentDidMount(){
+  this.viewcourse();
+ this.viewimage()
+}
 
 
   render() {
+    YellowBox.ignoreWarnings(['Warning: ...']);
+  
+  console.disableYellowBox = true;
     return (
 
       <ScrollView style={styles.container}>
@@ -171,19 +180,19 @@ export default class AiScreen extends React.Component {
             </View>
           </View>
 
-          <FlatList
+          <FlatList 
 
-            keyExtractor={(item, index) => index.toString()}
-            data1={this.state.data1}
+keyExtractor={(item,index) => index.toString()}
+data={this.state.data}
 
-            renderItem={
-              ({ item }) => (
+renderItem={
+  ({item})=>(
+    <View styles={styles.item}>
+      <Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
+</View>
+  ) }  
 
-                <View styles={styles.item}><Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
-                </View>
-              )}
-
-          />
+/>  
 
           <View style={styles.courseNameComponent}>
             <View>
@@ -246,7 +255,7 @@ export default class AiScreen extends React.Component {
                 <View styles={styles.item}>
                   <Image
                     source={{ uri: item }}
-                    style={{ width: 250, height: 250, margin: 20, borderRadius: 30 }}
+                    style={{ width: 250, height: 250, margin: 5, borderRadius: 30 }}
                   />
 
                 </View>
