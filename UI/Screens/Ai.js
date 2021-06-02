@@ -13,7 +13,7 @@ export default class AiScreen extends React.Component {
     secondRate: 1,
     courselink: '',
     data: [],
-    data1: [],
+    course: [],
     image: null,
     uploading: false,
   };
@@ -108,19 +108,21 @@ export default class AiScreen extends React.Component {
     }
   };
  viewcourse=()=> {
-    fetch('http://192.168.1.5:3000/viewimage', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json()).
-      then(results => {
-        this.setState({ data: results.data })
-        console.log(results.data)
-      })
-
-  }
+ 
+  fetch('http://192.168.1.5:3000/viewcourse',{
+    method:'GET',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    }}).then(res => res.json()).
+        then(result => {
+          this.setState({ course: result.course })
+          console.log(result.course)
+        })
+  
+    }
+      
+  
 
   viewimage=()=> {
     fetch('http://192.168.1.5:3000/viewimage', {
@@ -183,13 +185,17 @@ componentDidMount(){
           <FlatList 
 
 keyExtractor={(item,index) => index.toString()}
-data={this.state.data}
+data={this.state.course}
 
 renderItem={
   ({item})=>(
-    <View styles={styles.item}>
-      <Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
-</View>
+
+<View styles={styles.item}>
+ 
+  <Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
+
+  
+  </View>
   ) }  
 
 />  
@@ -260,8 +266,6 @@ renderItem={
 
                 </View>
               )}
-
-
           />
         </View>
 
@@ -272,7 +276,7 @@ renderItem={
   constructor(props) {
     super()
     this.state = {
-      courselink: '', data: [], file: null, uploading: false
+      courselink: '', data: [], file: null, uploading: false,course:[]
 
     };
   }
