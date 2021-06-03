@@ -1,9 +1,51 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text, TextInput,ScrollView, } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Text,FlatList, TextInput,ScrollView, } from 'react-native';
 
 
 export default class AiScreen extends React.Component {
-
+  state = {
+   
+    tutoriallink: '',
+    tutoriallink2:'',
+    Tutorials: [],
+    Tutorials2: []
+  };
+  viewtutorials=()=> {
+ 
+    fetch('http://192.168.1.7:3000/viewtutorials',{
+      method:'GET',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      }}).then(res => res.json()).
+          then(result => {
+            this.setState({ Tutorials: result.Tutorials })
+            console.log(result.Tutorials)
+          })
+    
+      }
+        
+    
+  
+      viewtutorials2=()=> {
+      fetch('http://192.168.1.7:3000/viewtutorials2', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json()).
+        then(results => {
+          this.setState({ Tutorials2: results.Tutorials2 })
+          console.log(results.Tutorials2)
+        })
+  
+    }
+  
+  componentDidMount(){
+    this.viewtutorials();
+   this.viewtutorials2()
+  }
 render() {
     return (
       <ScrollView style={styles.container}> 
@@ -35,25 +77,43 @@ render() {
               
 
 
-              <View styles={styles.item}>
-                <Text style={styles.Link}>First link</Text>
+              <View styles={styles.Header}>
+                <Text style={styles.text}>All links</Text>
               </View>
-          
-              <View styles={styles.item}>
+              <FlatList 
+
+keyExtractor={(item,index) => index.toString()}
+data={this.state.Tutorials}
+
+renderItem={
+  ({item})=>(
+
+<View styles={styles.item}>
+ 
+  <Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
+
+  
+  </View>
+  ) }  
+
+/>
+              {/* <View styles={styles.item}>
                 <Text style={styles.Link}>Second link</Text>
-              </View>
+              </View> */}
 
 
               <View style={{flexDirection:"row",alignItems:'center'}}>
 
                   <View style={styles.courseNameComponent}>
                         <View>
-                           <TextInput placeholder="Link" multiline  style={styles.input}/>
+                           <TextInput placeholder="Link" multiline  style={styles.input}
+                           onChangeText={(tutoriallink) => this.setState({ tutoriallink })}
+                           value={this.state.tutoriallink}/>
                         </View>
                   </View>
 
                   <View style={styles.button}>
-                    <TouchableOpacity onPress={this.add} >
+                    <TouchableOpacity onPress={this.AddTutorial} >
                       <Text>Add tutorial</Text>
                     </TouchableOpacity>
                   </View>   
@@ -72,25 +132,44 @@ render() {
           
 
 
-          <View styles={styles.item}>
-            <Text style={styles.Link}>First link</Text>
+          <View styles={styles.HeaderTwo}>
+            <Text style={styles.text}>All links:</Text>
           </View>
-      
-          <View styles={styles.item}>
+          <FlatList 
+
+keyExtractor={(item,index) => index.toString()}
+data={this.state.Tutorials2}
+
+renderItem={
+  ({item})=>(
+
+<View styles={styles.item}>
+ 
+  <Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
+
+  
+  </View>
+  ) }  
+
+/>
+          {/* <View styles={styles.item}>
             <Text style={styles.Link}>Second link</Text>
-          </View>
+          </View> */}
 
 
           <View style={{flexDirection:"row",alignItems:'center'}}>
 
               <View style={styles.courseNameComponent}>
                     <View>
-                       <TextInput placeholder="Link" multiline  style={styles.input}/>
+                       <TextInput placeholder="Link" multiline  
+                       style={styles.input} 
+                       onChangeText={(tutoriallink2) => this.setState({ tutoriallink2 })}
+                value={this.state.tutoriallink2}/>
                     </View>
               </View>
 
               <View style={styles.button}>
-                <TouchableOpacity onPress={this.add} >
+                <TouchableOpacity onPress={this.AddTutorial} >
                   <Text>Add tutorial</Text>
                 </TouchableOpacity>
               </View>   
@@ -99,6 +178,38 @@ render() {
         
         </ScrollView>
     );}
+    constructor(props) {
+      super()
+      this.state = {
+        tutoriallink: '',tutoriallink2:'' ,Tutorials: [], Tutorials2: [],
+  
+      };
+    }
+    AddTutorial = () => {
+  
+  
+      fetch('http://192.168.1.7:3000/addtutoriallink', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          tutoriallink: this.state.tutoriallink,
+          tutoriallink2:this.state.tutoriallink2
+  
+        })
+      })
+        .then((response) => response.json())
+        .then((res) => {
+          alert("link uplode")
+  
+        })
+        .done()
+    }
+  
+  
+  
 
 }
 const styles = StyleSheet.create({

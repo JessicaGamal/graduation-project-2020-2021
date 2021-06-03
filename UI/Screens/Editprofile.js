@@ -5,53 +5,101 @@ import Picker from './Picker';
 import Picker2 from './Picker2';
 import Picker3 from './Picker3';
 export default class EditprofileScreen extends Component {
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      formdata: {
+        email: "",
+        EditUsername: "",
+        EditEmail: "",
+        EditPassword: ""
+      }
+    }
+  }
   render() {
-  
+    const {email,EditUsername, EditEmail,EditPassword}=this.state.formdata;
     return (
         <View style={styles.BG}>
       <View style={styles.container}>
-      
-
-
-
-
-        <View style={styles.inputView} >
-        <View style={styles.Icon}>
-        <MaterialCommunityIcons name='mail' size={20}	color='#94C2CB'/>
-        </View>
-          <TextInput style={styles.inputText}  placeholder="Current e-mail"   placeholderTextColor="#003f5c"  />
-        </View>
-
-
-
-
-
-        <View style={styles.inputView} >
-        <View style={styles.Icon}>
-        <MaterialCommunityIcons name='mailbox' size={20}	color='#94C2CB'/>
-        </View>
-          <TextInput style={styles.inputText}  placeholder="New e-mail"   placeholderTextColor="#003f5c"  />
-        </View>
-
-
-
-        <View style={styles.inputView} >
-        <View style={styles.Icon}>
-            <Entypo name='user' size={20} color='#94C2CB' 	/>
-        </View>
-          <TextInput style={styles.inputText}  placeholder="New username"   placeholderTextColor="#003f5c"  />
-        </View>
         
 
         <View style={styles.inputView} >
         <View style={styles.Icon}>
-        <MaterialCommunityIcons name='form-textbox-password' size={20}	color='#94C2CB'/>
+        <MaterialCommunityIcons name='email' size={20}  color='#94C2CB'/>
         </View>
-          <TextInput style={styles.inputText}  placeholder="New password"   placeholderTextColor="#003f5c"  />
+          <TextInput style={styles.inputText} 
+           placeholder="current mail"  
+           placeholderTextColor="#003f5c" 
+           onChangeText={email => 
+            this.setState( provState=>({
+              formdata:{
+                ...provState.formdata,
+                email
+              }
+            }))
+          }
+          value={email} />
         </View>
 
-       
+        <View style={styles.inputView} >
+        <View style={styles.Icon}>
+        <MaterialCommunityIcons name='mail' size={20} color='#94C2CB'/>
+        </View>
+          <TextInput style={styles.inputView} 
+             placeholder="New E-mail"
+             placeholderTextColor="#003f5c" 
+             onChangeText={EditEmail => 
+              this.setState( provState=>({
+                formdata:{
+                  ...provState.formdata,
+                  EditEmail
+                }
+              }))
+            }
+            value={EditEmail}  />
+        </View>
+        <View style={styles.inputView} >
+        <View style={styles.Icon}>
+            <Entypo name='user' size={20} color='#94C2CB'   />
+        </View>
+        
+        <TextInput style={styles.inputText}
+            placeholder="New Username"  
+            placeholderTextColor="#003f5c" 
+            onChangeText={EditUsername => 
+              this.setState( provState=>({
+                formdata:{
+                  ...provState.formdata,
+                  EditUsername
+                }
+              }))
+            }
+            value={EditUsername}
+              />
+        </View>
+
+        
+
+        <View style={styles.inputView} >
+        <View style={styles.Icon}>
+        <MaterialCommunityIcons name='form-textbox-password' size={20}  color='#94C2CB'/>
+        </View>
+          <TextInput style={styles.inputText}
+            placeholder="New Password"  
+            placeholderTextColor="#003f5c" 
+            onChangeText={EditPassword => 
+              this.setState( provState=>({
+                formdata:{
+                  ...provState.formdata,
+                  EditPassword
+                }
+              }))
+            }
+            value={EditPassword}
+              />
+        </View>
+
+        
 
 
         <View style={styles.inputView} >
@@ -68,8 +116,6 @@ export default class EditprofileScreen extends Component {
         </View>
           <TextInput style={styles.inputText}  placeholder="Address"   placeholderTextColor="#003f5c"  />
         </View>
-
-        
 
         <View style={styles.row}>
         <View style={styles.column}> 
@@ -93,7 +139,9 @@ export default class EditprofileScreen extends Component {
         </View>
         </View>
 
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity 
+        onPress={this._Edit}
+        style={styles.loginBtn}>
           <Text style={styles.loginText}>Edit</Text>
         </TouchableOpacity>
        
@@ -102,6 +150,31 @@ export default class EditprofileScreen extends Component {
       </View>
 
     );
+  }
+  
+  _Edit = async() => {
+    try{
+      await fetch('http://192.168.1.5:3000/editProfile',{
+        method:'POST',
+        headers:{
+          Accept:'application/json',
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify(this.state.formdata),
+      }).then(response =>response.text())
+      .then(responsejson=>{
+        alert(JSON.stringify(responsejson));
+      }).catch((error)=>{
+        console.error(error);
+      });
+     
+    }
+    catch(error){
+alert(error)
+
+    }
+    
+    alert(JSON.stringify(this.state.formdata));
   }
 }
 const styles = StyleSheet.create({
@@ -175,3 +248,4 @@ column:
     marginRight:5,
 },
 });
+ 

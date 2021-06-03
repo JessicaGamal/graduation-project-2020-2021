@@ -6,6 +6,44 @@ const user_jwt = require('../controllers/user_jwt');
 const jwt = require('jsonwebtoken');
 const Subject = require('../models/subject');
 
+router.post('/editProfile',  async(req, res, next)=>{
+   
+        EditUsername= req.body.EditUsername; 
+        EditEmail= req.body.EditEmail ;
+        EditPassword = req.body.EditPassword;
+        const salt = await bcryptjs.genSalt(10);
+        password2 =await bcryptjs.hash(EditPassword, salt)   
+  //      try {
+            //const email= req.body.email;
+         User.findOneAndUpdate({email:req.body.email},{  
+               username: EditUsername, 
+                email:EditEmail,
+               password : password2
+                },{new:true},(error,data)=>{
+                    if(error){
+                  console.log(error)      
+                    }else{
+                        console.log(data)
+               
+    // })
+                    }
+                
+             })
+    //}
+    // .then(result=>{
+    //     res.status(200).json({
+    //         Updated_Profile:result
+    //     })
+    // })
+    //  .catch(err=> {
+    //     console.log(err);  
+    //     res.status(500).json({
+    //         error:err
+    //     })
+    // });
+
+})
+
 
 router.get('/register', user_jwt, async(req, res, next) => {
     try {

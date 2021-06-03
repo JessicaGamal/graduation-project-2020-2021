@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button } from 'react-native';
+import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, AsyncStorage } from 'react-native';
 import 'react-native-gesture-handler';
 
 
 
-export default
-  class Login extends Component {
+export default class Login extends Component {
   state={
     email:"",
     password:"" 
@@ -37,16 +36,17 @@ export default
             value={this.state.password}/>
         </View>
         <TouchableOpacity
-          onPress={() => this.props.navigation.replace("StartScreen")}
+          onPress={this.login}
         style={styles.loginBtn}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-        onPress={() => this.props.navigation.replace("SignupScreen") }
+        onPress={() => 
+          this.props.navigation.replace('SignupScreen')}
         >
           <Text style={styles.loginTextNew}>Signup</Text>
         </TouchableOpacity>
-       
+        
       </View>
     );
   }
@@ -54,7 +54,7 @@ export default
   constructor(props){
     super(props)
     this.state={email:'',password:''}
-    
+
   }
 
 
@@ -75,15 +75,10 @@ export default
     .then((response)=>response.json())
     .then((res)=>{
       if(res.success ===true){
-
-     
-        device.saveItem("id_token", res.token);
-        console.log(res.token);
-
         var email=res.message;
-       // AsyncStorage.setItem('email',email)
+        AsyncStorage.setItem('email',email)
         alert('You Are Logged In...!')
-        this.props.navigation.replace("Signup")
+        this.props.navigation.replace('StartScreen')
        
       }else{
         alert(res.message)

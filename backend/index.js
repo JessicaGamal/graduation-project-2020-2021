@@ -21,9 +21,10 @@ connecttodb();
 app.use('/',require('./routes/user'));
 app.use('/',require('./routes/CalculateGpa&total houres'));
 app.use('/',require('./routes/addlink'));
+app.use('/',require('./routes/PV-AddLink'));
 app.use('/',require('./routes/uploadpdf'));
 app.use('/',require('./routes/expert'));
-app.use('/',require('./routes/poll'));
+//app.use('/',require('./routes/poll'));
 app.use('/',require('./routes/video'));
 
 const port = process.env.port ||3000;
