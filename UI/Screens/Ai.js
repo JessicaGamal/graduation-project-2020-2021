@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Linking, Image, ActivityIndicator, Button, View, TouchableOpacity, Text, TextInput, FlatList, ScrollView, TouchableWithoutFeedback, Animated, Easing, LogBox } from 'react-native';
+import { StyleSheet, Linking, Image,Dimensions , ActivityIndicator, Button, View, TouchableOpacity, Text, TextInput, FlatList, ScrollView, TouchableWithoutFeedback, Animated, Easing, LogBox } from 'react-native';
 import * as ImagePicker from "expo-image-picker";
 import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import {YellowBox} from 'react-native';
-
+import Lightbox from 'react-native-lightbox';
 export default class AiScreen extends React.Component {
 
   
@@ -28,20 +28,9 @@ export default class AiScreen extends React.Component {
     if (!this.state.uploading) {
       return (
         <View style={styles.c}>
-          {/* <View  style={styles.button1}>
-              <Button 
-                onPress={this._pickImage}
-                title="Pick "
-              />
-            </View> */}
-          <View style={styles.button1}>
-            {/* <Feather name="camera" size={70} color="#BFF0E6"  onPress={this._pickImage}
-  /> */}
-          </View>
           <View style={styles.button1} >
             <EvilIcons name="image" size={100} color='#BFF0E6' onPress={this._pickImage} />
 
-            {/* <Button  onPress={this._takePhoto} title="Take a photo" /> */}
             <Feather name="camera" size={70} color="#BFF0E6" onPress={this._takePhoto} />
           </View>
         </View>
@@ -144,11 +133,12 @@ componentDidMount(){
  this.viewimage()
 }
 
-
   render() {
     YellowBox.ignoreWarnings(['Warning: ...']);
-  
   console.disableYellowBox = true;
+  const { width } = Dimensions.get('screen');
+  const { height } = Dimensions.get('screen');
+
     return (
 
       <ScrollView style={styles.container}>
@@ -190,12 +180,10 @@ data={this.state.course}
 renderItem={
   ({item})=>(
 
-<View styles={styles.item}>
- 
+ <View style={{flexDirection:'row',padding:5,marginBottom:5,backgroundColor:'lightgray',borderRadius:12}}>
   <Text onPress={() => Linking.openURL(item)} style={styles.Link}>{item}</Text>
 
-  
-  </View>
+</View>
   ) }  
 
 />  
@@ -219,12 +207,12 @@ renderItem={
         </View>
 
         <View style={styles.Header}>
-          <Text style={styles.text}>About Artificial Intelligence's Project</Text>
+          <Text style={styles.text}>LAST EXAMS</Text>
         </View>
         <View style={styles.inputTwo}>
           <View style={styles.inputThree}>
             <View style={styles.HeaderTwo}>
-              <Text style={styles.textTwo}>Project Description</Text>
+              <Text style={styles.textTwo}>EXAMS</Text>
             </View>
           </View>
           <View >
@@ -247,7 +235,7 @@ renderItem={
           {this._maybeRenderControls()}
           <Image
             source={{ uri: this.state.image }}
-            style={{ width: 250, height: 250 }}
+            style={{ width: 400, height: 400 }}
           />
 
           <FlatList horizontal
@@ -259,11 +247,12 @@ renderItem={
               ({ item }) => (
 
                 <View styles={styles.item}>
+                   <Lightbox>
                   <Image
                     source={{ uri: item }}
-                    style={{ width: 250, height: 250, margin: 5, borderRadius: 30 }}
+                    style={{ width: 500, height: 300, margin: 5, borderRadius: 30 }}
                   />
-
+</Lightbox>
                 </View>
               )}
           />
@@ -283,7 +272,7 @@ renderItem={
   add = () => {
 
 
-    fetch('http://192.168.1.6:3000/addcourse', {
+    fetch('http://192.168.1.5:3000/addcourse', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -402,6 +391,11 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 6, height: 6 },
 
   },
+  separatorLine: {
+    height: 1,
+    backgroundColor: 'plum',
+    paddingTop: 2,
+  },
   textTwo: {
     fontWeight: 'bold',
 
@@ -435,7 +429,7 @@ const styles = StyleSheet.create({
 
 
 async function uploadImageAsync(uri) {
-  let apiUrl = "http://192.168.1.4:3000/image"
+  let apiUrl = "http://192.168.1.5:3000/image"
 
   let uriArray = uri.split(".");
   let fileType = uriArray[uriArray.length - 1];

@@ -3,6 +3,8 @@ import { ScrollView, ActivityIndicator, TouchableOpacity } from "react-native-ge
 import { View, Text, FlatList, Image, StyleSheet, Dimensions, ImageBackground, TextInput, _ScrollView } from "react-native";
 import React from 'react';
 import { Video } from 'expo-av';
+import Lightbox from 'react-native-lightbox';
+
 import * as ImagePicker from "expo-image-picker";
 export default class PostScreen extends React.Component {
 
@@ -149,14 +151,16 @@ export default class PostScreen extends React.Component {
                         <View style={styles.ppTime}>
                           <Text style={styles.ppText}>1/13/2021</Text></View>
                       </View>
+                     
+<Lightbox>
                       <Video
                         source={{ uri: item }}
-                        shouldPlay="false"
+                        shouldPlay
                         resizeMode="cover"
-                        style={{ width: 500, height: 200 }}
+                        style={{ width: 500, height: 300 }}
                       />
 
-
+</Lightbox>
                     </View>
                   )}
 
