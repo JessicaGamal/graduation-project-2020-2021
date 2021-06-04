@@ -1,6 +1,8 @@
-import { Entypo, MaterialCommunityIcons, } from '@expo/vector-icons';
+import {  MaterialCommunityIcons, } from '@expo/vector-icons';
+import { MaterialIcons} from '@expo/vector-icons';
+
 import { ScrollView, ActivityIndicator, TouchableOpacity } from "react-native-gesture-handler";
-import { View, Text, FlatList, Image, StyleSheet, Dimensions, ImageBackground, TextInput, _ScrollView } from "react-native";
+import { View, Text, Linking,FlatList, Image, StyleSheet, Dimensions, ImageBackground, TextInput, _ScrollView } from "react-native";
 import React from 'react';
 import { Video } from 'expo-av';
 import Lightbox from 'react-native-lightbox';
@@ -10,6 +12,9 @@ export default class PostScreen extends React.Component {
 
   state = {
     desc: '',
+    data:[],
+    description:[],
+    URL:'',
     image: null,
     uploading: false,
   };
@@ -65,7 +70,46 @@ export default class PostScreen extends React.Component {
     }
   };
   componentDidMount() {
-    fetch('http://192.168.1.5:3000/viewvideo', {
+    this.viewdesc();
+    this.viewvideo()
+
+  }
+  adddesc = () => {
+
+
+    fetch('http://192.168.1.5:3000/desc', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        desc: this.state.desc,
+        URL: this.state.URL,
+      })
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        alert("description added")
+
+      })
+      .done()
+  }
+viewdesc=()=>{
+  fetch('http://192.168.1.5:3000/viewdesc', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(res => res.json()).
+      then(results => {
+        this.setState({ description: results.description })
+        console.log(results.description)
+      })
+}
+viewvideo=()=>{
+  fetch('http://192.168.1.5:3000/viewvideo', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -76,8 +120,8 @@ export default class PostScreen extends React.Component {
         this.setState({ data: results.data })
         console.log(results.data)
       })
+}
 
-  }
 
 
   render() {
@@ -89,35 +133,35 @@ export default class PostScreen extends React.Component {
           <View style={styles.Row2}>
             <Image source={require('./Images/p1.jpg')} style={styles.Profile} />
             <View style={styles.searchView}>
-
-              <Video
+            <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
+                onChangeText={(desc) => this.setState({ desc })}
+                value={this.state.desc}
+              />
+        <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
+                onChangeText={(URL) => this.setState({ URL })}
+                value={this.state.URL}
+              />
+              {/* <Video
                 source={{ uri: this.state.image }}
                 shouldPlay
                 resizeMode="cover"
-                style={{ width: 200, height: 200 }}
+                style={{ width: 200, height: 80 }}
               />
-
+  */}
             </View>
             <View style={styles.column}>
               <View style={styles.Icon}>
                 <MaterialCommunityIcons name='postage-stamp' size={35} color='#333' onPress={this._pickImage} />
-
+                <MaterialIcons name='post-add' size={35} color='#333' onPress={this.adddesc} />
               </View>
+           
             </View>
-            {/* <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
-                onChangeText={(desc) => this.setState({ desc })}
-                value={this.state.desc}
-              /> */}
-
-
-
             <TouchableOpacity onPress={() => this.props.navigation.navigate("Home")}>
 
 
             </TouchableOpacity>
           </View>
-
-
+        
 
           <View style={styles.Divider} />
 
@@ -154,18 +198,62 @@ export default class PostScreen extends React.Component {
                      
 <Lightbox>
                       <Video
-                        source={{ uri: item }}
+                        source={{ uri: item.URL }}
                         shouldPlay
                         resizeMode="cover"
-                        style={{ width: 500, height: 300 }}
+                        style={{ width: 500, height: 100 }}
                       />
 
 </Lightbox>
+
+
                     </View>
                   )}
 
 
               />
+                <FlatList
+
+keyExtractor={(item, index) => index.toString()}
+data={this.state.description}
+
+renderItem={
+  ({ item }) => (
+
+    <View styles={styles.item}>
+      <View style={styles.Header}>
+        <View style={styles.Row}>
+          <Image source={require('./Images/4.jpg')} style={styles.Profile} />
+
+        </View>
+
+      </View>
+      <View style={{ paddingLeft: 10 }}>
+        <View style={styles.User}>
+          <Text style={styles.ppText}>Nourhan Magdy</Text>
+        </View>
+
+      </View>
+      <View style={styles.Row}>
+        <View style={styles.ppTime}>
+          <Text style={styles.ppText}>1/13/2021</Text></View>
+      </View>
+     
+      <View style={{flexDirection:'row',padding:5,marginBottom:5,backgroundColor:'lightgray',borderRadius:12}}>
+      <Text >{item.desc}</Text>
+</View>
+  
+<View style={{flexDirection:'row',padding:5,marginBottom:5,backgroundColor:'lightgray',borderRadius:12}}>
+<Text onPress={() => Linking.openURL(item.URL)} style={styles.Link}>{item.URL}</Text>
+</View>
+
+
+    </View>
+  )}
+
+
+/>
+          
             </View>
             <View style={styles.Footer}>
               <View style={styles.FooterCount}>
@@ -176,9 +264,7 @@ export default class PostScreen extends React.Component {
               </View>
             </View>
 
-            <View style={styles.BottomDivider} />
-          </View>
-
+        </View>
         </ImageBackground>
       </ScrollView>
 
