@@ -1,95 +1,273 @@
 import {Entypo, MaterialCommunityIcons, } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { View, Text, Image, StyleSheet,ImageBackground,TextInput ,_ScrollView } from "react-native";
+import { View,FlatList, Text, Image, StyleSheet,ImageBackground,TextInput,_ScrollView ,CheckBox} from "react-native";
 import React from 'react';
 import CustomMultiPicker from "react-native-multiple-select-list";
 
+
+
 export default class PostScreen extends React.Component {
 
-    userlist ={
-        "123":"V1",
-        "124":"V2",
-      }
-  render() {
 
+     
+      state={
+        
+    question:"",
+    choice1:"",
+     choice2:"",
+     questions:[],
+     viewchoice1:[],
+     viewchoice2:[],
+   data:[],
+   vot:"",
+   vot2:""
+   
+     
+      }
+         
+  componentDidMount() {
+     this.viewQuestion();
+}
+
+viewQuestion=()=> {
+  fetch('http://192.168.1.9:3000/ShowVotes', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json()).
+  then(results => {
+    this.setState({ data: results.data })
+    console.log(results.data)
+  })
+}
+vote1=()=>{
+  console.log(this.state.vot);
+  fetch('http://192.168.1.9:3000/VoteNumber1',{
+    method:'POST',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json',
+     // 'Authorization' : 'Bearer ' + device.getToken()  
+    },
+      body:JSON.stringify({vot:this.state.vot})
+      
+  })
+  .then(response => { return response.json();})
+  .then(responseData => 
+    
+    {
+      if(responseData){
+       
+        alert("done")
+      }
+
+    return responseData;})
+
+}
+vote2=()=>{
+  console.log(this.state.vot2);
+  fetch('http://192.168.1.9:3000/VoteNumber2',{
+    method:'POST',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json',
+     // 'Authorization' : 'Bearer ' + device.getToken()  
+    },
+      body:JSON.stringify({vot2:this.state.vot2})
+      
+  })
+  .then(response => { return response.json();})
+  .then(responseData => 
+    
+    {
+      if(responseData){
+       
+        alert("done")
+      }
+
+    return responseData;})
+
+}
+
+  render() {
+    
       return (
         
         <ScrollView>
-           
+        
        <ImageBackground source={require("./Images/w3.jpg")}  style={styles.backgriundImage} >
        <View style={styles.Row2}>
            <View style={styles.searchView}>
-                <TextInput placeholder="write Your question" multiline  style={styles.searchtext}/>
+                <TextInput placeholder="write Your question" multiline  style={styles.searchtext}
+                onChangeText={(question)=>this.setState({question})}
+            value={this.state.question}/>
                 <View style={styles.Row}>
-                <Text style={{marginLeft:10,fontSize:15,}}>V1:</Text>
-                <TextInput placeholder="write Your first choice" multiline  style={styles.votetext}/>
+                <Text style={{marginLeft:10,fontSize:15,}}>Option1:</Text>
+                
+                <TextInput placeholder="write Your first choice" multiline  style={styles.votetext}
+                onChangeText={(choice1)=>this.setState({choice1})}
+            value={this.state.choice1}/>
                 </View>
                 <View style={styles.Row}>
-                <Text style={{marginLeft:10,fontSize:15,}}>V1:</Text>
-                <TextInput placeholder="write Your second choice" multiline  style={styles.votetext}/>
+                <Text style={{marginLeft:10,fontSize:15,}}>Option2:</Text>
+                <TextInput placeholder="write Your second choice" multiline  style={styles.votetext}
+                onChangeText={(choice2)=>this.setState({choice2})}
+            value={this.state.choice2}/>
                 </View>
             </View>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate("Home")}>
+            <TouchableOpacity onPress={this.vote}>
             <View style={styles.column}>
             <View style={styles.Icon}>
-								<MaterialCommunityIcons	name='arrow-right-bold-circle-outline' size={25}	color='#333'/>
-							</View>
-							<Text style={styles.Textblack}>Post</Text>
-						</View>
+                <MaterialCommunityIcons name='arrow-right-bold-circle-outline' size={25}  color='#333'/>
+              </View>
+              <Text style={styles.Textblack}>Post</Text>
+            </View>
             </TouchableOpacity>
         </View>
-				<View style={styles.Divider}/>
 
+       <FlatList
+keyExtractor={(item, index) => index.toString()}
+data={this.state.data}
 
-        <View style={styles.Container}>
-				<View style={styles.Header}>
-        <View style={styles.Row}>
-          <Image source={require('./Images/4.jpg')} style={styles.Profile}/>
-						<View style={{ paddingLeft: 10 }}>
-            <View style={styles.User}>
-            <Text style={styles.ppText}>Nourhan Magdy</Text></View>
-            <View style={styles.Row}>
-            <View style={styles.ppTime}>
-            <Text style={styles.ppText}>1/13/2021</Text></View>
-							</View>
-						</View>
-					</View>
+renderItem={
+  
+  ({ item }) => (          
+    <View styles={styles.item}>
+                      <View style={styles.Header}>
+                        <View style={styles.Row}>
+                          <Image source={require('./Images/4.jpg')} style={styles.Profile} />
 
-				</View>
+                        </View>
 
-		<View style={styles.Post}>
-            <Text style={styles.Text}>
-            Artificial intelligence (AI) . 
-            </Text>
-		</View>
-       <View style={{width:"70%"}}>
-                <CustomMultiPicker
-                options={this.userlist}
-                search={false} 
-                multiple={false} 
-                multiline
-                placeholder={"Vote"}
-                placeholderTextColor={'#757575'}
-                returnValue={"label"} // label or value
-                callback={(res)=>{ console.log(res) }} // callback, array of selected items
-                rowBackgroundColor={"#eee"}
-                rowHeight={40}
-                rowRadius={5}
-                iconColor={"#53D6BB"}
-                iconSize={30}
-                selectedIconName={"checkbox"}
-                unselectedIconName={"ios-checkbox-outline"}
+                      </View>
+                      <View style={{ paddingLeft: 10 }}>
+                        <View style={styles.User}>
+                          <Text style={styles.ppText}>Nourhan Magdy</Text>
+                        </View>
+
+                      </View>
+                      <View style={styles.Row}>
+                        <View style={styles.ppTime}>
+                          <Text style={styles.ppText}>1/13/2021</Text></View>
+                      </View>
+                                               
+{/* ///////////question/////////// */}
+     <View >      
+    <Text style={{marginLeft:30,fontSize:30,color:"#fff"}}>{item.question}</Text>
+    </View>
+
+{/* //////////////////choice1 and vote1 */}
+    <View style={styles.TextCount}>
+            <Text style={{marginLeft:15,fontSize:30,color:"#fff"}}>{item.vote1}</Text>
+              </View>
+    <TouchableOpacity onPress={()=>{
+         this.state.vot=item.choice1
+      console.log("vot",(this.state.vot)) 
+     }}>        
+           <View style={styles.Row2}>   
+           <View style={styles.searchView}>
+                <View style={styles.Row}>
+                <MaterialCommunityIcons  size={25}  color='#333'/>
+                <Text style={{marginLeft:15,fontSize:30,}} value={item.choice1}
+                   >{item.choice1}</Text>
+                </View>     
+          </View> 
+          </View>
+        </TouchableOpacity> 
+          <TouchableOpacity onPress={this.vote1}>
+            <View style={styles.row}>
+            <View style={styles.Icon}>
+                <MaterialCommunityIcons name='arrow-right-bold-circle-outline' size={25}  color='#333'/>
+              </View>
+              <Text style={styles.Textblack}>vote</Text>
+            </View>
+            </TouchableOpacity>
+       
+
+            <View style={styles.TextCount}>
+            <Text style={{marginLeft:15,fontSize:30,color:"#fff"}}>{item.vote2}</Text>
+              </View>
+    <TouchableOpacity onPress={()=>{
+         this.state.vot2=item.choice2
+      console.log("vot",(this.state.vot2)) 
+     }}>        
+           <View style={styles.Row2}>   
+           <View style={styles.searchView}>
+                <View style={styles.Row}>
+                <MaterialCommunityIcons  size={25}  color='#333'/>
+                <Text style={{marginLeft:15,fontSize:30,}} value={item.choice2}
+                   >{item.choice2}</Text>
+                </View>     
+          </View> 
+          </View>
+        </TouchableOpacity> 
+          <TouchableOpacity onPress={this.vote2}>
+            <View style={styles.row}>
+            <View style={styles.Icon}>
+                <MaterialCommunityIcons name='arrow-right-bold-circle-outline' size={25}  color='#333'/>
+              </View>
+              <Text style={styles.Textblack}>vote2</Text>
+            </View>
+            </TouchableOpacity>
+
                
-            />
-		</View>	
-        <View style={styles.BottomDivider}/>
-			</View>
+       
+        <View style={styles.BottomDivider}/> 
+      </View> 
+    
+  )}
+  />
       </ImageBackground> 
           </ScrollView>
       
       );
     }
+    constructor(props){
+    super(props)
+    this.state={question:'',choice1:'', choice2:'',vot:[]}
+
+     
+
   }
+ 
+   
+  
+
+
+  vote=()=>{
+        
+    
+    fetch('http://192.168.1.9:3000/AddPoll',{
+      method:'POST',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
+        body:JSON.stringify({
+          question:this.state.question,
+          choice1:this.state.choice1,
+              choice2:this.state.choice2,
+
+        })
+    })
+    .then((response)=>response.json())
+    .then((res)=>{
+      if(res.success ===true){
+             alert('Posted..!')
+        
+       
+      }else{
+        alert(res.message)
+      }
+    })
+    .done()
+  }
+}
+
+  
+
 
 
   const styles = StyleSheet.create({
@@ -179,16 +357,16 @@ export default class PostScreen extends React.Component {
  },
 
 Divider:{
-	width: "100%",
-	height: 0.5,
-	backgroundColor: "#f0f0f0",
+  width: "100%",
+  height: 0.5,
+  backgroundColor: "#f0f0f0",
   marginTop:15,
   },
   Row2:{
-	flexDirection: "row",
-	backgroundColor: "#ffffff",
-	width: "100%",
-	alignItems: "center",
+  flexDirection: "row",
+  backgroundColor: "#ffffff",
+  width: "100%",
+  alignItems: "center",
 
   },
  
@@ -220,6 +398,17 @@ userlist:{
 width:"30%",
 fontSize:10,
 color:"#fff"
+},
+
+checkboxContainer: {
+  flexDirection: "row",
+  marginBottom: 20,
+},
+checkbox: {
+  alignSelf: "center",
+},
+label: {
+  margin: 8,
 },
   });
 

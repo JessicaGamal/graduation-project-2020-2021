@@ -77,7 +77,7 @@ export default class PostScreen extends React.Component {
   adddesc = () => {
 
 
-    fetch('http://192.168.1.5:3000/desc', {
+    fetch('http://192.168.1.9:3000/desc', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -96,7 +96,7 @@ export default class PostScreen extends React.Component {
       .done()
   }
 viewdesc=()=>{
-  fetch('http://192.168.1.5:3000/viewdesc', {
+  fetch('http://192.168.1.9:3000/viewdesc', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -109,7 +109,7 @@ viewdesc=()=>{
       })
 }
 viewvideo=()=>{
-  fetch('http://192.168.1.5:3000/viewvideo', {
+  fetch('http://192.168.1.9:3000/viewvideo', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
