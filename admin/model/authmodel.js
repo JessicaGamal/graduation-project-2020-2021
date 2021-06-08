@@ -70,10 +70,10 @@ exports.getallusers =()=>{
     User.remove({_id: req.params.id}, function(err) {
 
         if(err) {
-            console.log("Delete Animal Error", err);
+            console.log("Delete USER Error", err);
         }
         else {
-            console.log("Animal deleted!");
+            console.log("USER deleted!");
             res.redirect("list.ejs");
         }
 
