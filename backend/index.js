@@ -26,6 +26,8 @@ app.use('/',require('./routes/uploadpdf'));
 app.use('/',require('./routes/expert'));
 app.use('/',require('./routes/description'));
 app.use('/',require('./routes/poll'));
+app.use('/',require('./routes/AddPost'));
+app.use('/',require('./routes/comment'));
 
 
 //app.use('/',require('./routes/poll'));

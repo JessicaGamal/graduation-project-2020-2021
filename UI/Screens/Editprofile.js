@@ -154,7 +154,7 @@ export default class EditprofileScreen extends Component {
   
   _Edit = async() => {
     try{
-      await fetch('http://192.168.1.5:3000/editProfile',{
+      await fetch('http://192.168.1.7:3000/editProfile',{
         method:'POST',
         headers:{
           Accept:'application/json',
