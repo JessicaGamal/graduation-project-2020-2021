@@ -6,6 +6,7 @@ import HomeStack from './HomeStack';
 import AboutStack from './AboutStack';
 import ProfileStack from './ProfileStack';
 import SlideBar from '../components/SlideBar';
+import Login from '../Screens/Login';
 
 
 // drawer navigation options
