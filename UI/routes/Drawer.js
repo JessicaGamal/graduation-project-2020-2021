@@ -66,6 +66,17 @@ const RootDrawerNavigator = createDrawerNavigator({
    
   },
 
+  Logout: {
+    screen: Login,
+    navigationOptions:{
+      
+      title: "Logout",
+      drawerIcon: ()=> <MaterialIcons name='logout' size={28}  />
+     
+    }
+   
+  },
+
 },
 {
    contentComponent: props => <SlideBar {...props}/>,
