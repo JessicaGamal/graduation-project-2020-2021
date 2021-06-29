@@ -6,8 +6,6 @@ import HomeStack from './HomeStack';
 import AboutStack from './AboutStack';
 import ProfileStack from './ProfileStack';
 import SlideBar from '../components/SlideBar';
-import ToDoListStack from "./ToDoListStack";
-import SettingsStack from "./SettingStack";
 
 
 // drawer navigation options
@@ -32,27 +30,6 @@ const RootDrawerNavigator = createDrawerNavigator({
       drawerIcon: ()=> <MaterialIcons name='person' size={28}  />
     }
     
-  },
-
-  ToDoList: {
-    screen: ToDoListStack,
-    navigationOptions:{
-      
-      title: "ToDoList",
-      drawerIcon: ()=> <MaterialIcons name='list' size={28}  />
-     
-    }
-  },
-
-  Settings: {
-    screen: SettingsStack,
-    navigationOptions:{
-      
-      title: "Settings",
-      drawerIcon: ()=> <MaterialIcons name='settings' size={28}  />
-     
-    }
-   
   },
 
   About: {
