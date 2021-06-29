@@ -98,7 +98,7 @@ export default class AiScreen extends React.Component {
   };
  viewcourse=()=> {
  
-  fetch('http://192.168.1.5:3000/viewcourse',{
+  fetch('http://192.168.1.7:3000/viewcourse',{
     method:'GET',
     headers:{
       'Accept':'application/json',
@@ -114,7 +114,7 @@ export default class AiScreen extends React.Component {
   
 
   viewimage=()=> {
-    fetch('http://192.168.1.5:3000/viewimage', {
+    fetch('http://192.168.1.7:3000/viewimage', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -429,7 +429,7 @@ const styles = StyleSheet.create({
 
 
 async function uploadImageAsync(uri) {
-  let apiUrl = "http://192.168.1.5:3000/image"
+  let apiUrl = "http://192.168.1.7:3000/image"
 
   let uriArray = uri.split(".");
   let fileType = uriArray[uriArray.length - 1];

@@ -172,7 +172,7 @@ export default function Expert () {
     const [index, setIndex] = useState(0)
     calculate=()=>{
         console.log(answers)
-        fetch('http://192.168.1.4:3000/answer',{
+        fetch('http://192.168.1.7:3000/answer',{
         method:'POST',
         headers:{
           'Accept':'application/json',

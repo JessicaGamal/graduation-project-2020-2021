@@ -14,7 +14,7 @@ export default function CalculateGPA () {
  
   const GPA=()=>{
 
-    fetch('http://192.168.1.3:3000/GPA',{
+    fetch('http://192.168.1.7:3000/GPA',{
       method:'POST',
       headers:{
         'Accept':'application/json,text/plain',

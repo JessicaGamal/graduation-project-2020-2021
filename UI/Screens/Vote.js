@@ -30,7 +30,7 @@ export default class PostScreen extends React.Component {
 }
 
 viewQuestion=()=> {
-  fetch('http://192.168.1.9:3000/ShowVotes', {
+  fetch('http://192.168.1.7:3000/ShowVotes', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -44,7 +44,7 @@ viewQuestion=()=> {
 }
 vote1=()=>{
   console.log(this.state.vot);
-  fetch('http://192.168.1.9:3000/VoteNumber1',{
+  fetch('http://192.168.1.7:3000/VoteNumber1',{
     method:'POST',
     headers:{
       'Accept':'application/json',
@@ -68,7 +68,7 @@ vote1=()=>{
 }
 vote2=()=>{
   console.log(this.state.vot2);
-  fetch('http://192.168.1.9:3000/VoteNumber2',{
+  fetch('http://192.168.1.7:3000/VoteNumber2',{
     method:'POST',
     headers:{
       'Accept':'application/json',
@@ -239,7 +239,7 @@ renderItem={
   vote=()=>{
         
     
-    fetch('http://192.168.1.9:3000/AddPoll',{
+    fetch('http://192.168.1.7:3000/AddPoll',{
       method:'POST',
       headers:{
         'Accept':'application/json',
