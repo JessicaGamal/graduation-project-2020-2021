@@ -69,8 +69,13 @@ ViewAllPosts=()=> {
   .done()
 
  }
+ // take post id 
   toggleExpanded = () => {
     this.setState({ collapsed: !this.state.collapsed });
+
+  // get all comment with post id 
+
+
   };
 
   setSections = sections => {
