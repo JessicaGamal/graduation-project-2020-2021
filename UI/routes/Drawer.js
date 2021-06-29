@@ -6,8 +6,7 @@ import HomeStack from './HomeStack';
 import AboutStack from './AboutStack';
 import ProfileStack from './ProfileStack';
 import SlideBar from '../components/SlideBar';
-import ToDoListStack from "./ToDoListStack";
-import SettingsStack from "./SettingStack";
+import Login from '../Screens/Login';
 
 
 // drawer navigation options
@@ -34,27 +33,6 @@ const RootDrawerNavigator = createDrawerNavigator({
     
   },
 
-  ToDoList: {
-    screen: ToDoListStack,
-    navigationOptions:{
-      
-      title: "ToDoList",
-      drawerIcon: ()=> <MaterialIcons name='list' size={28}  />
-     
-    }
-  },
-
-  Settings: {
-    screen: SettingsStack,
-    navigationOptions:{
-      
-      title: "Settings",
-      drawerIcon: ()=> <MaterialIcons name='settings' size={28}  />
-     
-    }
-   
-  },
-
   About: {
     screen: AboutStack,
     navigationOptions:{
@@ -62,6 +40,17 @@ const RootDrawerNavigator = createDrawerNavigator({
       title: "About",
       drawerIcon: ()=>  <MaterialIcons name='lightbulb' size={28}  />
       //drawerIcon: ()=> <MaterialIcons name="emoji-people"
+    }
+   
+  },
+
+  Logout: {
+    screen: Login,
+    navigationOptions:{
+      
+      title: "Logout",
+      drawerIcon: ()=> <MaterialIcons name='logout' size={28}  />
+     
     }
    
   },
