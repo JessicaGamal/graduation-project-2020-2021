@@ -28,5 +28,26 @@ module.exports= {
                 res.json(result)
             }
         })
+    },
+    getcomments :async (req,res)=>{
+
+        const {postId} = req.body;
+        
+        try{
+            var content = await AddNewPost.findById(postId)
+                                .select("-content").select('-_id') .populate('comments');
+            console.log(content)
+               
+              // res.send(allsubject);
+               res.status(200).json(
+                content,
+                  // contents: content
+               );
+             
+           } catch (error) {
+               console.log(error.message);
+           }
     }
+
+
 };

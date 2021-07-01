@@ -1,4 +1,6 @@
 let AddNewPost = require('../models/AddPost');
+
+
 module.exports = {
     AddPost : async (req, res) => {
 //console.log(req.body);
@@ -32,7 +34,7 @@ ViewAllPosts : async (req, res) => {
     // var content = await AddNewPost.find().select('content').select("-_id")
     // console.log(content)
     try{
-     var content = await AddNewPost.find().select('content').select("-_id")
+     var content = await AddNewPost.find().populate('comments').select('content').select("_id");
      console.log(content)
         
        // res.send(allsubject);

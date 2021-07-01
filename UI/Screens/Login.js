@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, AsyncStorage } from 'react-native';
 import 'react-native-gesture-handler';
+import * as SecureStore from 'expo-secure-store';
 
 
 
@@ -75,6 +76,8 @@ export default class Login extends Component {
     .then((response)=>response.json())
     .then((res)=>{
       if(res.success ===true){
+        SecureStore.setItemAsync("id_token", res.token);
+        console.log(res.token);
         var email=res.message;
         AsyncStorage.setItem('email',email)
         alert('You Are Logged In...!')
