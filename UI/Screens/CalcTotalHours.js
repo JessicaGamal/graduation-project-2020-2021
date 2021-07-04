@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView,FlatList } from 'react-native';
 import CustomMultiPicker from "react-native-multiple-select-list";
+import AwesomeAlert from 'react-native-awesome-alerts';
 //import deviceStorage from '../services/deviceStorage';
+
+
  class CalcTotalHoursScreen extends React.Component  {
 
    constructor() {
     super();
     this.state = {
-        viewSubjects: []
+        viewSubjects: [],
+        showAlert: false,
+        GPA: 2
     };
    // device = new deviceStorage() ;
   } 
@@ -17,7 +22,7 @@ import CustomMultiPicker from "react-native-multiple-select-list";
     
   }
   async getData(){
-   let data  = await fetch('http://192.168.1.7:3000/subject/all');
+   let data  = await fetch('http://192.168.1.8:3000/subject/all');
    let reso = await data.json();
    var names = reso.subjects.map(function(item) {
     return item['name'];
@@ -86,6 +91,20 @@ import CustomMultiPicker from "react-native-multiple-select-list";
           <Text>Calculate Total Hours</Text>
         </TouchableOpacity>
       </View>
+      <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your GPA"
+          message={`Your GPA is ${this.state.GPA}`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
       </ScrollView>
     </View>
       
@@ -93,8 +112,9 @@ import CustomMultiPicker from "react-native-multiple-select-list";
   }
 
   calculate=()=>{
+
     console.log(this.ListOfsub);
-      fetch('http://192.168.1.7:3000/subject/totalhours',{
+      fetch('http://192.168.1.8:3000/subject/totalhours',{
       method:'POST',
       headers:{
         'Accept':'application/json',
@@ -106,13 +126,14 @@ import CustomMultiPicker from "react-native-multiple-select-list";
     })
     .then(response => { return response.json();})
     .then(responseData => 
-      
+    
       {
         if(responseData){
           const total = responseData.total;
           
           console.log(total); 
-          alert(total)
+          this.setState({Totalhours: total}, ()=>this.setState({showAlert: true}))
+          
         }
 
       return responseData;})

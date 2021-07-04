@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ImageBackground,Alert, TouchableOpacity, Text, TextInput, ScrollView, TextComponent } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 
 export default function CalculateGPA () {
   var a,b;
   //const [selectedValueOne, setSelectedValueOne] = useState('');
   const [gpa, setGpa] = useState();
+ const [calculatedGPA, setCalculatedGPA] = useState(3)
   const [hour, setHour] = useState();
   const [credit, setCredit] = useState([]);
   const [score, setScore] = useState([]);
   const [arr,setArr] = useState([]);
+  const [showAlert, setShow] = useState(false)
   //console.log(Object.assign({},score));
  
   const GPA=()=>{
-
-    fetch('http://192.168.1.7:3000/GPA',{
+    fetch('http://192.168.1.8:3000/GPA',{
       method:'POST',
       headers:{
         'Accept':'application/json,text/plain',
         'Content-Type':'application/json'
       },
-        body:JSON.stringify({
+        body: JSON.stringify({
 
          "score":score,
          
@@ -33,7 +36,10 @@ export default function CalculateGPA () {
     })
     .then((response)=>response.json())
     .then(responsejson=>{
-      alert(JSON.stringify(responsejson));
+      
+         setCalculatedGPA(JSON.stringify(responsejson))
+         setShow(true)
+    
     })
     }    
       
@@ -42,6 +48,20 @@ export default function CalculateGPA () {
         <View style={styles.container}>
           <ImageBackground source={require('./Images/gpa-calculator.jpg')} style={styles.backgriundImage}>
           </ImageBackground>
+          <AwesomeAlert
+          show={showAlert}
+          showProgress={false}
+          title="Displaying your GPA"
+          message={`Your GPA is ${calculatedGPA}`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           setShow(false)
+          }}
+          />
           <View style={styles.Header}>
             <Text style={styles.text}>Course Name</Text>
             <Text style={styles.text}>Grade</Text>

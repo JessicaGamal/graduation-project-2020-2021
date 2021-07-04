@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 
 let qeus =
 [
@@ -42,23 +44,23 @@ let qeus =
     },
     {
         Q: "do you want to know how the computer translate the code?,9",  /////7
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Do you interested in robots and feel excited to know more about it?,10",  ////8
-        yesIndex : 31,
-        noIndex : 31,
+        yesIndex : -1,
+        noIndex : -1,
     },
     {
         Q: "Did you interested in IS,DB1 and OR content?,11", /////9
-        yesIndex : 31,
-        noIndex : 31,
+        yesIndex : -1,
+        noIndex : -1,
     },
     {
         Q: "Do you interested in robots and feel excited to know more about it?,12",///10
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Are you intersted Data analysis?,13",///11
@@ -72,23 +74,23 @@ let qeus =
     },
     {
         Q: "Do you interseted in typing queries?,15",///13
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "did you feel comfort when you were making sw1 project diagrams?,16",///14
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Do you interested in problem solving, coding and gaming?,17",///15
-        yesIndex : 31,
-        noIndex : 31,
+        yesIndex : -1,
+        noIndex : -1,
     },
     {
         Q: "do you want to know how the computer translate the code?,18",//16
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Do you interseted in typing queries?,19",///17
@@ -112,23 +114,23 @@ let qeus =
     },
     {
         Q: "do you want to gain more experience in how the systems work?,23",///21
-        yesIndex : 31,
-        noIndex : 31,
+        yesIndex : -1,
+        noIndex : -1,
     },
     {
         Q: "did you feel comfort when you were making sw1 project diagrams?,24",////22
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Do you intersted in Problem solving?,25",////23
-        yesIndex : 31,
-        noIndex : 31,
+        yesIndex : -1,
+        noIndex : -1,
     },
     {
         Q: "do you want to gain more experience in how the systems work?,26",////24
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Do you interested in problem solving, coding and gaming?,27",////25
@@ -142,37 +144,35 @@ let qeus =
     },
     {
         Q: ",Do you interested in robots and feel excited to know more about it?,29",////27
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "do you want to gain more experience in how the systems work?,30",////28
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
-        Q: "did you feel comfort when you were making sw1 project diagrams?,31",//29
-        yesIndex : 31 ,
-        noIndex : 31,
+        Q: "did you feel comfort when you were making sw1 project diagrams?,-1",//29
+        yesIndex : -1 ,
+        noIndex : -1,
     },
     {
         Q: "Do you interested in data analysis?,32",///30
-        yesIndex : 31 ,
-        noIndex : 31,
-    },
-    {
-        Q: "End of questions,33",//////31
-        yesIndex : 31 ,
-        noIndex : 31,
+        yesIndex : -1 ,
+        noIndex : -1,
     },]
 
 export default function Expert () {
     const [started, setStarted] = useState(false)
+    const [result, setResult] = useState(0)
     const [answers, setAnswers] = useState([])
+    const [showAlert, setShow] = useState(false)
+    const [finished, setFinished] = useState(false)
     const [index, setIndex] = useState(0)
     calculate=()=>{
         console.log(answers)
-        fetch('http://192.168.1.7:3000/answer',{
+        fetch('http://192.168.1.8:3000/answer',{
         method:'POST',
         headers:{
           'Accept':'application/json',
@@ -187,6 +187,10 @@ export default function Expert () {
       })
       .then((response)=>response.json())
       .then(responsejson=>{
+          /* 
+            setResult(response)
+            setShow(true)
+          */
         alert(JSON.stringify(responsejson));
         console.log(responsejson)
       })
@@ -196,13 +200,15 @@ export default function Expert () {
     
 console.log(answers)
     const next = ()=>{
-        if(qeus.length - 1 > 0){
-        (answers[index])
-        if (answers[index] == true)
-            setIndex([qeus[index].yesIndex])
-        else if(answers[index] == false)
-            setIndex([qeus[index].noIndex])
-
+        if(index <= 8){
+            if (answers[index] == true){
+                if(qeus[index].yesIndex === -1) return setFinished(true)
+                setIndex([qeus[index].yesIndex])
+            }
+            else if(answers[index] == false){
+                if(qeus[index].noIndex === -1) return setFinished(true)
+                setIndex([qeus[index].noIndex])
+            }
         }
         else{
             console.log('Questions Ended')
@@ -211,7 +217,20 @@ console.log(answers)
 
     return(
         <ImageBackground source={require('./Images/gpa-calculator.jpg')} style={styles.backgriundImage}>
-            
+        <AwesomeAlert
+            show={showAlert}
+            showProgress={false}
+            title="Displaying your GPA"
+            message={`Your GPA is ${result}`}
+            closeOnTouchOutside={true}
+            closeOnHardwareBackPress={false}
+            showConfirmButton={true}
+            confirmText="OK"
+            confirmButtonColor="#DD6B55"
+            onConfirmPressed={() => {
+            setShow(false)
+            }}
+          />
             {!started && 
             <View>
                 <View style={styles.Header}>
@@ -230,7 +249,7 @@ console.log(answers)
                 </View>
             </View>
             }
-            {started && (
+            {started && !finished && (
             <View>
                 <View>
                     <Text style={styles.Qtext}>{qeus[index].Q}</Text>
@@ -263,12 +282,11 @@ console.log(answers)
                 </View>
             </View>
             )}
-             <View style={styles.button}>
-        <TouchableOpacity
- onPress={()=>calculate()}        >
-          <Text>Calculate</Text>
-        </TouchableOpacity>
-      </View>
+            {finished && <View style={styles.button}>
+                    <TouchableOpacity onPress={()=>calculate()}        >
+                    <Text>Calculate</Text>
+                    </TouchableOpacity>
+            </View>}
         </ImageBackground>
     );
     

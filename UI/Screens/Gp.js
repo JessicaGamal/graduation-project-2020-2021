@@ -1,6 +1,6 @@
 import {  MaterialCommunityIcons, } from '@expo/vector-icons';
 import { MaterialIcons} from '@expo/vector-icons';
-
+import AwesomeAlert from 'react-native-awesome-alerts';
 import { ScrollView, ActivityIndicator, TouchableOpacity } from "react-native-gesture-handler";
 import { View, Text, Linking,FlatList, Image, StyleSheet, Dimensions, ImageBackground, TextInput, _ScrollView } from "react-native";
 import React from 'react';
@@ -11,6 +11,8 @@ import * as ImagePicker from "expo-image-picker";
 export default class PostScreen extends React.Component {
 
   state = {
+    showAlert: false,
+    add: 'added',
     desc: '',
     data:[],
     description:[],
@@ -67,6 +69,8 @@ export default class PostScreen extends React.Component {
       console.log({ e });
     } finally {
       this.setState({ uploading: false });
+      this.viewvideo()
+
     }
   };
   componentDidMount() {
@@ -77,7 +81,7 @@ export default class PostScreen extends React.Component {
   adddesc = () => {
 
 
-    fetch('http://192.168.1.7:3000/desc', {
+    fetch('http://192.168.1.8:3000/desc', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -90,13 +94,14 @@ export default class PostScreen extends React.Component {
     })
       .then((response) => response.json())
       .then((res) => {
-        alert("description added")
+        this.setState({res}, ()=>this.setState({showAlert: true}))
+        this.viewdesc();
 
       })
       .done()
   }
 viewdesc=()=>{
-  fetch('http://192.168.1.7:3000/viewdesc', {
+  fetch('http://192.168.1.8:3000/viewdesc', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -109,7 +114,7 @@ viewdesc=()=>{
       })
 }
 viewvideo=()=>{
-  fetch('http://192.168.1.7:3000/viewvideo', {
+  fetch('http://192.168.1.8:3000/viewvideo', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -137,6 +142,20 @@ viewvideo=()=>{
                 onChangeText={(desc) => this.setState({ desc })}
                 value={this.state.desc}
               />
+               <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your post"
+          message={`Your post is ${this.state.add}`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
         <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
                 onChangeText={(URL) => this.setState({ URL })}
                 value={this.state.URL}
@@ -198,10 +217,10 @@ viewvideo=()=>{
                      
 <Lightbox>
                       <Video
-                        source={{ uri: item.URL }}
+                        source={{ uri: item }}
                         shouldPlay
                         resizeMode="cover"
-                        style={{ width: 500, height: 100 }}
+                        style={{ width: 500, height: 500 }}
                       />
 
 </Lightbox>
@@ -394,7 +413,8 @@ const styles = StyleSheet.create({
 
 
 async function uploadImageAsync(uri) {
-  let apiUrl = "http://192.168.1.7:3000/video"
+  
+  let apiUrl = "http://192.168.1.8:3000/video"
   let uriArray = uri.split(".");
   let fileType = uriArray[uriArray.length - 1];
 
@@ -406,7 +426,6 @@ async function uploadImageAsync(uri) {
     name: `video.${fileType}`,
     type: `video/${fileType}`,
   });
-  // formData.append('desc', desc);
 
   console.log(uri)
 
@@ -418,8 +437,10 @@ async function uploadImageAsync(uri) {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
     },
+    
   };
 
   return fetch(apiUrl, options);
+  
 }
 

@@ -2,6 +2,7 @@ import React from "react";
 import {MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View, Text, Image, ImageBackground, TextInput, StyleSheet } from "react-native";
+import Lightbox from 'react-native-lightbox';
 
 export default class HomeScreen extends React.Component {
     render() {
@@ -14,7 +15,7 @@ export default class HomeScreen extends React.Component {
         
         
 
-          <View style={styles.searchView}>
+        <View style={styles.searchView}>
               
               <MaterialIcons name="search" color="#333" size={32} />
               <TextInput placeholder="Search" style={styles.searchtext} />
@@ -87,27 +88,7 @@ export default class HomeScreen extends React.Component {
                Vote
               </Text>
               </View>
-
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}
-                style={{  alignItems: "center", justifyContent: "center",  height: 66, width: 66, borderRadius: 15, backgroundColor: "#bb32fe",marginHorizontal:10 }} >
-                <Text style={{fontSize:20,color:"#fff",fontWeight:'bold',fontStyle:'italic'}}>Fcai</Text>
-              </TouchableOpacity>
-              <Text style={{color: "#fff",fontSize: 12, marginVertical: 8, marginHorizontal: 10,}}>
-               FCAI-HU Info
-              </Text>
-              </View>
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Courses")}
-                style={{  alignItems: "center", justifyContent: "center",  height: 66, width: 66, borderRadius: 15, backgroundColor: "#2C79AF",marginHorizontal:10 }} >
-                 <MaterialIcons name="school" color="white" size={32} />
-              </TouchableOpacity>
-              <Text style={{color: "#fff",fontSize: 12, marginVertical: 8, marginHorizontal: 25,}}>
-               Levels
-              </Text>
-              </View>
+              
             </ScrollView>
             </View>
             
@@ -208,8 +189,7 @@ export default class HomeScreen extends React.Component {
             </Text>
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.mapone} >
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}>
+
               <View
                 style={{
                   backgroundColor: "#05A7A4",
@@ -222,11 +202,18 @@ export default class HomeScreen extends React.Component {
                   alignItems:'center'
                 }}
               >
+            <View style={{ width: 180,  height: 130 }}>
+            <Lightbox activeProps={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 10}}>
                 
                 <Image
                   source={require("./Images/2.jpg")}
-                  style={{ width: 180, borderRadius: 10, height: 130 }}
+                  style={{width: '100%', height: '100%', borderRadius: 10,}}
+                  resizeMode='cover'
+                  resizeMethod='resize'
                 />
+            </Lightbox>
+            </View>
+
                 <View
                   style={{
                     flexDirection: "row",
@@ -260,7 +247,7 @@ export default class HomeScreen extends React.Component {
                 
               </View>
               </View>
-              </TouchableOpacity>
+              
               <View
                 style={{
                   backgroundColor: "#05A7A4",
@@ -273,11 +260,18 @@ export default class HomeScreen extends React.Component {
                   alignItems:'center'
                   
                 }}
-              >
+                >
+            <View style={{ width: 180,  height: 130 }}>
+            <Lightbox activeProps={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                
                 <Image
                   source={require("./Images/3.jpg")}
-                  style={{ width: 180, borderRadius: 10, height: 130 }}
+                  style={{width: '100%', height: '100%', borderRadius: 10,}}
+                  resizeMode='cover'
+                  resizeMethod='resize'
                 />
+            </Lightbox>
+            </View>
                 <View
                   style={{
                     flexDirection: "row",
@@ -305,9 +299,7 @@ export default class HomeScreen extends React.Component {
                 
                 </View>
               </View>
-  
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Home")}>
+
               <View
                 style={{
                   backgroundColor: "#05A7A4",
@@ -315,16 +307,23 @@ export default class HomeScreen extends React.Component {
                   width: 190,
                   borderRadius: 15,
                   padding: 5,
-                  marginHorizontal: 10,
+                  marginHorizontal: 5,
                   marginVertical:10,
                   alignItems:'center'
+                  
                 }}
-              >
+                >
+            <View style={{ width: 180,  height: 130 }}>
+            <Lightbox activeProps={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 
                 <Image
                   source={require("./Images/19.jpg")}
-                  style={{ width: 180, borderRadius: 10, height: 130 }}
+                  style={{width: '100%', height: '100%', borderRadius: 10,}}
+                  resizeMode='cover'
+                  resizeMethod='resize'
                 />
+            </Lightbox>
+            </View>
                 <View
                   style={{
                     flexDirection: "row",
@@ -332,8 +331,6 @@ export default class HomeScreen extends React.Component {
                     alignItems: "center",
                   }}
                 >
-
-                
                   <View
                     style={{
                       paddingHorizontal: 5,
@@ -342,21 +339,20 @@ export default class HomeScreen extends React.Component {
                   >
                     <Text
                       style={{
-                        
+                      
                         fontSize: 15,
                         color: "#fff",
                       }}
                     >
-                       Fcai-Hu General department's map 
+                      Fcai-Hu General department's map
+                      
                     </Text>
                   </View>
+                
+                </View>
+              </View>
+  
 
-                
-               
-                
-              </View>
-              </View>
-              </TouchableOpacity>
             </ScrollView>
           </View>
           </ImageBackground>

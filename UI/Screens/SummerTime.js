@@ -10,91 +10,91 @@ export default class  DepartmentScreen extends React.Component {
         <ImageBackground
         source={require("./Images/w2.jpg")}
         style={styles.backgriundImage}
-      >
-         
-          <ScrollView>
+        >
+            <View style={{justifyContent:"center"}}>
+            <ScrollView>
         
-      <View style={styles.titlestyle}>
-            <Text style={styles.titletextstyle}>
-              Summer Time
-            </Text>
-            </View>
-            
-      <View style={styles.header}>
-        
-           
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button } >
-                <Text style={styles.text}>P&V</Text>
-              </TouchableOpacity>
-              
+              <View style={styles.titlestyle}>
+              <Text style={styles.titletextstyle}>Summer Time</Text>
               </View>
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button} >
-                <Text style={styles.text}>Graphics</Text>
-              </TouchableOpacity>
               
-              </View>
+        <View style={styles.header}>
+          
              
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button} >
-                <Text style={styles.text}>Programming</Text>
-              </TouchableOpacity>
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button } >
+                  <Text style={styles.text}>Production&Video</Text>
+                </TouchableOpacity>
+                
+                </View>
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button} >
+                  <Text style={styles.text}>Graphics</Text>
+                </TouchableOpacity>
+                
+                </View>
+               
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button} >
+                  <Text style={styles.text}>Programming</Text>
+                </TouchableOpacity>
+                
+                </View>
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button} >
+                  <Text style={styles.text}>DB admin.</Text>
+                </TouchableOpacity>
+                
+                </View>
+  
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button } >
+                  <Text style={styles.text}>Production&Video</Text>
+                </TouchableOpacity>
+                
+                </View>
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button} >
+                  <Text style={styles.text}>Graphics</Text>
+                </TouchableOpacity>
+                
+                </View>
+               
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button} >
+                  <Text style={styles.text}>Programming</Text>
+                </TouchableOpacity>
+                
+                </View>
+                <View>
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.navigate("Pv")}
+                  style={styles.button} >
+                  <Text style={styles.text}>DB admin.</Text>
+                </TouchableOpacity>
+                
+                </View>
               
               </View>
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button} >
-                <Text style={styles.text}>DB admin.</Text>
-              </TouchableOpacity>
               
-              </View>
-
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button } >
-                <Text style={styles.text}>P&V</Text>
-              </TouchableOpacity>
-              
-              </View>
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button} >
-                <Text style={styles.text}>Graphics</Text>
-              </TouchableOpacity>
-              
-              </View>
-             
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button} >
-                <Text style={styles.text}>Programming</Text>
-              </TouchableOpacity>
-              
-              </View>
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Pv")}
-                style={styles.button} >
-                <Text style={styles.text}>DB admin.</Text>
-              </TouchableOpacity>
-              
-              </View>
-            
+              </ScrollView>
             </View>
-            
-            </ScrollView>
-            </ImageBackground>
+          
+        </ImageBackground>
          
         
       );
@@ -119,8 +119,8 @@ export default class  DepartmentScreen extends React.Component {
    {
      fontSize:14,
      color:"#333",
-   fontWeight:'bold',
-   fontStyle:'italic'
+     fontWeight:'bold',
+     fontStyle:'italic'
   },
     ////////////////////////////
     button:{
@@ -136,23 +136,20 @@ export default class  DepartmentScreen extends React.Component {
     
     titlestyle:
     {
-      flexDirection: 'column',
-      borderRadius: 10,
-      width: '100%', 
-      padding:10 ,
+      padding:5 ,
       marginTop:20,
-      marginHorizontal:10,
-      
-     
+      marginHorizontal:15,
     },
     ////////////////////
     titletextstyle:
     {
       fontWeight: 'bold',
-      fontSize: 30,
+      fontSize: 40,
       color:'#fff',
       textDecorationLine: 'underline',
-      
+      fontStyle: 'italic',
+      textShadowOffset:{width: 6, height: 6},
+      textShadowRadius:20,
     },
     
 

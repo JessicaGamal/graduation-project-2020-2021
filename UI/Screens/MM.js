@@ -5,13 +5,10 @@ import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import {YellowBox} from 'react-native';
 import Lightbox from 'react-native-lightbox';
-import AwesomeAlert from 'react-native-awesome-alerts';
-
 export default class AiScreen extends React.Component {
 
   
   state = {
-    showAlert: false,
     firstRate: 2,
     secondRate: 1,
     courselink: '',
@@ -97,12 +94,11 @@ export default class AiScreen extends React.Component {
       console.log({ e });
     } finally {
       this.setState({ uploading: false });
-      this.viewimage()
     }
   };
  viewcourse=()=> {
  
-  fetch('http://192.168.1.8:3000/viewcourse',{
+  fetch('http://192.168.1.7:3000/viewcourse',{
     method:'GET',
     headers:{
       'Accept':'application/json',
@@ -118,7 +114,7 @@ export default class AiScreen extends React.Component {
   
 
   viewimage=()=> {
-    fetch('http://192.168.1.8:3000/viewimage', {
+    fetch('http://192.168.1.7:3000/viewimage', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -146,21 +142,8 @@ componentDidMount(){
     return (
 
       <ScrollView style={styles.container}>
- <AwesomeAlert
-          show={this.state.showAlert}
-          showProgress={false}
-          title="Displaying your post"
-          message={`Your link is added`}
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={false}
-          showConfirmButton={true}
-          confirmText="OK"
-          confirmButtonColor="#DD6B55"
-          onConfirmPressed={() => {
-           this.setState({showAlert: false})
-          }}
-        />
-        <Image source={require('./Images/AI.jpg')} style={styles.backgriundImage}>
+
+        <Image source={require('./Images/MM.jpg')} style={styles.backgriundImage}>
         </Image>
         <View style={styles.Header}>
           <Text style={styles.text}>About Artificial Intelligence Course</Text>
@@ -265,11 +248,11 @@ renderItem={
 
                 <View styles={styles.item}>
                    <Lightbox>
-                      <Image
-                        source={{ uri: item }}
-                        style={{ width: 500, height: 300, margin: 5, borderRadius: 30 }}
-                      />
-                    </Lightbox>
+                  <Image
+                    source={{ uri: item }}
+                    style={{ width: 500, height: 300, margin: 5, borderRadius: 30 }}
+                  />
+</Lightbox>
                 </View>
               )}
           />
@@ -289,7 +272,7 @@ renderItem={
   add = () => {
 
 
-    fetch('http://192.168.1.8:3000/addcourse', {
+    fetch('http://192.168.1.5:3000/addcourse', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -302,11 +285,10 @@ renderItem={
     })
       .then((response) => response.json())
       .then((res) => {
-        this.setState({res}, ()=>this.setState({showAlert: true}))
-      this.viewcourse()
+        alert("link uplode")
+
       })
       .done()
-      
   }
 
 
@@ -445,7 +427,7 @@ const styles = StyleSheet.create({
 
 
 async function uploadImageAsync(uri) {
-  let apiUrl = "http://192.168.1.8:3000/image"
+  let apiUrl = "http://192.168.1.7:3000/image"
 
   let uriArray = uri.split(".");
   let fileType = uriArray[uriArray.length - 1];

@@ -90,7 +90,7 @@ export default class Signup extends Component {
 
   _saveData = async() => {
     try{
-      await fetch('http://192.168.1.7:3000/register',{
+      await fetch('http://192.168.1.8:3000/register',{
         method:'POST',
         headers:{
           Accept:'application/json',

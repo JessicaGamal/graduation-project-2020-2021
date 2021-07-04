@@ -3,6 +3,7 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View,FlatList, Text, Image, StyleSheet,ImageBackground,TextInput,_ScrollView ,CheckBox} from "react-native";
 import React from 'react';
 import CustomMultiPicker from "react-native-multiple-select-list";
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 
@@ -11,7 +12,8 @@ export default class PostScreen extends React.Component {
 
      
       state={
-        
+        showAlert: false,
+        GPA: 'added',  
     question:"",
     choice1:"",
      choice2:"",
@@ -30,7 +32,7 @@ export default class PostScreen extends React.Component {
 }
 
 viewQuestion=()=> {
-  fetch('http://192.168.1.7:3000/ShowVotes', {
+  fetch('http://192.168.1.8:3000/ShowVotes', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -44,7 +46,7 @@ viewQuestion=()=> {
 }
 vote1=()=>{
   console.log(this.state.vot);
-  fetch('http://192.168.1.7:3000/VoteNumber1',{
+  fetch('http://192.168.1.8:3000/VoteNumber1',{
     method:'POST',
     headers:{
       'Accept':'application/json',
@@ -61,6 +63,7 @@ vote1=()=>{
       if(responseData){
        
         alert("done")
+  
       }
 
     return responseData;})
@@ -68,7 +71,7 @@ vote1=()=>{
 }
 vote2=()=>{
   console.log(this.state.vot2);
-  fetch('http://192.168.1.7:3000/VoteNumber2',{
+  fetch('http://192.168.1.8:3000/VoteNumber2',{
     method:'POST',
     headers:{
       'Accept':'application/json',
@@ -86,7 +89,6 @@ vote2=()=>{
        
         alert("done")
       }
-
     return responseData;})
 
 }
@@ -98,6 +100,20 @@ vote2=()=>{
         <ScrollView>
         
        <ImageBackground source={require("./Images/w3.jpg")}  style={styles.backgriundImage} >
+       <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your post"
+          message={`Your post is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
        <View style={styles.Row2}>
            <View style={styles.searchView}>
                 <TextInput placeholder="write Your question" multiline  style={styles.searchtext}
@@ -239,7 +255,7 @@ renderItem={
   vote=()=>{
         
     
-    fetch('http://192.168.1.7:3000/AddPoll',{
+    fetch('http://192.168.1.8:3000/AddPoll',{
       method:'POST',
       headers:{
         'Accept':'application/json',
@@ -254,13 +270,9 @@ renderItem={
     })
     .then((response)=>response.json())
     .then((res)=>{
-      if(res.success ===true){
-             alert('Posted..!')
-        
-       
-      }else{
-        alert(res.message)
-      }
+      this.setState({res}, ()=>this.setState({showAlert: true}))
+  this.viewQuestion()
+  
     })
     .done()
   }

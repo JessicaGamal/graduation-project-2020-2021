@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text,FlatList, TextInput,ScrollView, } from 'react-native';
-
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 export default class AiScreen extends React.Component {
   state = {
-   
+    showAlert: false,
     tutoriallink: '',
     tutoriallink2:'',
     Tutorials: [],
@@ -12,7 +12,7 @@ export default class AiScreen extends React.Component {
   };
   viewtutorials=()=> {
  
-    fetch('http://192.168.1.7:3000/viewtutorials',{
+    fetch('http://192.168.1.8:3000/viewtutorials',{
       method:'GET',
       headers:{
         'Accept':'application/json',
@@ -28,7 +28,7 @@ export default class AiScreen extends React.Component {
     
   
       viewtutorials2=()=> {
-      fetch('http://192.168.1.7:3000/viewtutorials2', {
+      fetch('http://192.168.1.8:3000/viewtutorials2', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -50,7 +50,20 @@ render() {
     return (
       <ScrollView style={styles.container}> 
 
-
+<AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your post"
+          message={`Your link is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
 
        <View style={styles.inputThree}>
           <View style={styles.HeaderTwo}>
@@ -188,7 +201,7 @@ renderItem={
     AddTutorial = () => {
   
   
-      fetch('http://192.168.1.7:3000/addtutoriallink', {
+      fetch('http://192.168.1.8:3000/addtutoriallink', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -202,8 +215,8 @@ renderItem={
       })
         .then((response) => response.json())
         .then((res) => {
-          alert("link uplode")
-  
+          this.setState({res}, ()=>this.setState({showAlert: true}))
+        this.viewtutorials()
         })
         .done()
     }

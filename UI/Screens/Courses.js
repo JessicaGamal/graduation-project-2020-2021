@@ -33,7 +33,7 @@ export default class  CoursesScreen extends React.Component {
               </View>
               <View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Ai")}
+                onPress={() => this.props.navigation.navigate("MM")}
                 style={styles.button} >
                 <Text style={styles.text}>MM</Text>
               </TouchableOpacity>
@@ -42,15 +42,15 @@ export default class  CoursesScreen extends React.Component {
              
               <View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Ai")}
+                onPress={() => this.props.navigation.navigate("DSS")}
                 style={styles.button} >
-                <Text style={styles.text}>Selected 4</Text>
+                <Text style={styles.text}>DSS</Text>
               </TouchableOpacity>
               
               </View>
               <View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Ai")}
+                onPress={() => this.props.navigation.navigate("DWH")}
                 style={styles.button} >
                 <Text style={styles.text}>DWH</Text>
               </TouchableOpacity>

@@ -9,7 +9,7 @@ export default class Cs extends React.Component {
         return (
           
           <ImageBackground source={require("./Images/18.jpg")}style={styles.backgriundImage}>
-            <Image source={require('./Images/CS.jpeg')} style={styles.Image}>
+            <Image source={require('./Images/IS.jpg')} style={styles.Image}>
             </Image>
             <ScrollView>
             <View  style={styles.container}>

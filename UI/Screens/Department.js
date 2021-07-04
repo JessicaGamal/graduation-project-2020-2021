@@ -29,33 +29,16 @@ export default class  DepartmentScreen extends React.Component {
                 style={styles.button } >
                 <Text style={styles.text}>Computer science</Text>
               </TouchableOpacity>
-              
+            
               </View>
               <View>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Cs")}
+                onPress={() => this.props.navigation.navigate("Is")}
                 style={styles.button} >
                 <Text style={styles.text}>Information system</Text>
               </TouchableOpacity>
-              
               </View>
              
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Cs")}
-                style={styles.button} >
-                <Text style={styles.text}>Software</Text>
-              </TouchableOpacity>
-              
-              </View>
-              <View>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Cs")}
-                style={styles.button} >
-                <Text style={styles.text}>Medical</Text>
-              </TouchableOpacity>
-              
-              </View>
             </View>
             
             </ScrollView>
