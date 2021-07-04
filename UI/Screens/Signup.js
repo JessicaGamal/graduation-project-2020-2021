@@ -7,7 +7,9 @@ export default class Signup extends Component {
       formdata: {
         username: "",
         email: "",
-        password: ""
+        password: "",
+        showAlert: false,
+
       }
     }
   }
@@ -21,6 +23,20 @@ export default class Signup extends Component {
         <Image
           style={styles.tinyLogo}
           source={require('./Images/my-icon5.png')}
+        />
+           <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your post"
+          message={`Your post is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
         />
         <View style={styles.inputView} >
           <TextInput
@@ -99,7 +115,8 @@ export default class Signup extends Component {
         body:JSON.stringify(this.state.formdata),
       }).then(response =>response.text())
       .then(responsejson=>{
-        alert(JSON.stringify(responsejson));
+        this.setState({responsejson}, ()=>this.setState({showAlert: true}))
+
       }).catch((error)=>{
         console.error(error);
       });

@@ -8,15 +8,32 @@ import * as SecureStore from 'expo-secure-store';
 export default class Login extends Component {
   state={
     email:"",
-    password:"" 
+    password:"" ,
+    showAlert: false,
+
   }
   
   render(){
     return (
       <View style={styles.container}>
+
         <Image
         style={styles.tinyLogo}
         source={require('./Images/my-icon5.png')}
+        />
+           <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your post"
+          message={`Your post is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
         />
         <View style={styles.inputView} >
           <TextInput  
@@ -76,11 +93,8 @@ export default class Login extends Component {
     .then((response)=>response.json())
     .then((res)=>{
       if(res.success ===true){
-        SecureStore.setItemAsync("id_token", res.token);
-        console.log(res.token);
-        var email=res.message;
-        AsyncStorage.setItem('email',email)
-        alert('You Are Logged In...!')
+      
+        this.setState({res}, ()=>this.setState({showAlert: true}))
         this.props.navigation.replace('StartScreen')
        
       }else{

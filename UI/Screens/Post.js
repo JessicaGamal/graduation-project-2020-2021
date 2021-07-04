@@ -33,7 +33,6 @@ export default class PostScreen extends React.Component {
     multipleSelect: false,
     posts:[],
     showAlert: false,
-    add: 'added',
     content:"",
     commentContent:""
    // comments:[]
@@ -187,7 +186,7 @@ ViewAllPosts=()=> {
           show={this.state.showAlert}
           showProgress={false}
           title="Displaying your post"
-          message={`Your post is ${this.state.add}`}
+          message={`Your post is added`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
