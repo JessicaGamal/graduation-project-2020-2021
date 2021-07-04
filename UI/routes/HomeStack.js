@@ -7,6 +7,7 @@ import  CalculateGPA from '../Screens/CalculateGPA';
 import Expert from '../Screens/Expert';
 import Department from '../Screens/Department'
 import Cs from '../Screens/Cs';
+import Is from '../Screens/Is';
 import  Questions from '../Screens/Questions';
 import Courses from '../Screens/Courses';
 import  CalcTotalHours from '../Screens/CalcTotalHours';
@@ -15,6 +16,10 @@ import  Gp from '../Screens/Gp';
 import  Vote from '../Screens/Vote';
 import  SummerTime from '../Screens/SummerTime';
 import Pv from '../Screens/Pv';
+import DWH from '../Screens/DWH';
+import MM from '../Screens/MM';
+import DSS from '../Screens/DSS';
+
 
 const screens = {
   Home: {
@@ -46,6 +51,12 @@ const screens = {
       title: 'Computer Science',
     }  
   },
+  Is: {
+    screen: Is,
+    navigationOptions: {
+      title: 'Information System',
+    }  
+  },
   CalculateGPA:{
     screen: CalculateGPA,
     navigationOptions: {
@@ -74,6 +85,24 @@ const screens = {
     screen:  Ai,
     navigationOptions: {
       title: 'Ai',
+    }  
+  },
+  DWH: {
+    screen:  DWH,
+    navigationOptions: {
+      title: 'DWH',
+    }  
+  },
+  MM: {
+    screen:  MM,
+    navigationOptions: {
+      title: 'MM',
+    }  
+  },
+  DSS: {
+    screen:  DSS,
+    navigationOptions: {
+      title: 'DSS',
     }  
   },
   Gp: {

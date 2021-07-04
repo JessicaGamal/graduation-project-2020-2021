@@ -9,6 +9,7 @@ import SlideBar from '../components/SlideBar';
 import Login from '../Screens/Login';
 
 
+
 // drawer navigation options
 const RootDrawerNavigator = createDrawerNavigator({
 
@@ -49,11 +50,12 @@ const RootDrawerNavigator = createDrawerNavigator({
     navigationOptions:{
       
       title: "Logout",
-      drawerIcon: ()=> <MaterialIcons name='logout' size={28}  />
+      drawerIcon: ()=> <MaterialIcons name='logout' size={28} />
      
     }
    
   },
+
 
 },
 {
@@ -73,9 +75,7 @@ const RootDrawerNavigator = createDrawerNavigator({
      }
    }
 
-   
-
-   }
+},
 
 
 );
