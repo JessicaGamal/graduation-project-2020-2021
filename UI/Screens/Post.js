@@ -2,6 +2,7 @@ import {Entypo, MaterialCommunityIcons, } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View, Text, Image, StyleSheet,ImageBackground,TextInput ,_ScrollView ,FlatList} from "react-native";
 import React from 'react';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
 
@@ -31,6 +32,8 @@ export default class PostScreen extends React.Component {
     collapsed: true,
     multipleSelect: false,
     posts:[],
+    showAlert: false,
+    add: 'added',
     content:"",
     commentContent:""
    // comments:[]
@@ -82,8 +85,8 @@ ViewAllPosts=()=> {
     console.log(res);
     if(res.success ===true){
    // console.log("hnaaaaaaaaaa");
-    alert("Posted Successfully");
-    this.ViewAllPosts();
+   this.setState({res}, ()=>this.setState({showAlert: true}))
+   this.ViewAllPosts();
      
     }else{
       alert(res.message)
@@ -180,6 +183,20 @@ ViewAllPosts=()=> {
         <ScrollView>
          
           <ImageBackground source={require("./Images/w2.jpg")}  style={styles.backgriundImage} >
+          <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          title="Displaying your post"
+          message={`Your post is ${this.state.add}`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#DD6B55"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
             <View style={styles.Row2}>
           
               <Image source={require('./Images/p1.jpg')} style={styles.Profile}/>
