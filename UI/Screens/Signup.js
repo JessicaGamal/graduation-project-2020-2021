@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AwesomeAlert from 'react-native-awesome-alerts';
+
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image } from 'react-native';
 export default class Signup extends Component {
   constructor(props) {
@@ -22,26 +23,26 @@ export default class Signup extends Component {
     return (
       <View style={styles.container}>
         <Image
-          style={styles.tinyLogo}
-          source={require('./Images/my-icon5.png')}
+        style={styles.tinyLogo}
+        source={require('./Images/T.png')}
         />
-        <View style={styles.inputView} >
-        <AwesomeAlert
+           <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your post"
-          message={`Your post is added`}
+        
+          message={`You're signup successifully`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
            this.props.navigation.replace('LoginScreen')
 
           }}
         />
+        <View style={styles.inputView} >
           <TextInput
             style={styles.inputText}
             placeholder="Username"
@@ -126,11 +127,9 @@ export default class Signup extends Component {
      
     }
     catch(error){
-alert(error)
 
     }
     
-    alert(JSON.stringify(this.state.formdata));
   }
 }
 const styles = StyleSheet.create({
@@ -158,6 +157,12 @@ const styles = StyleSheet.create({
   inputText: {
     height: 50,
     color: "black"
+  },
+  tinyLogo: {
+    width: 270,
+    height: 200,
+    marginBottom:10
+    
   },
   loginBtn: {
     width: "80%",

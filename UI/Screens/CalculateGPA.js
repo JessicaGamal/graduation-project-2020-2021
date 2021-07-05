@@ -36,11 +36,10 @@ export default function CalculateGPA () {
     })
     .then((response)=>response.json())
     .then(responsejson=>{
-      /* 
-         setCalculatedGPA(responsejson)
+       
+         setCalculatedGPA(JSON.stringify(responsejson))
          setShow(true)
-      */
-      alert(JSON.stringify(responsejson));
+      
     })
     }    
       
@@ -52,13 +51,12 @@ export default function CalculateGPA () {
           <AwesomeAlert
           show={showAlert}
           showProgress={false}
-          title="Displaying your GPA"
           message={`Your GPA is ${calculatedGPA}`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            setShow(false)
           }}

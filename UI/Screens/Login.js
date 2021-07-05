@@ -29,7 +29,7 @@ export default class Login extends Component {
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
            this.props.navigation.replace('StartScreen')
@@ -56,7 +56,7 @@ export default class Login extends Component {
         </View>
         <TouchableOpacity
         onPress={() => 
-          this.props.navigation.replace('StartScreen')}
+         this.login()}
         style={styles.loginBtn}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>

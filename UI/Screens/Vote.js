@@ -3,7 +3,6 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View,FlatList, Text, Image, StyleSheet,ImageBackground,TextInput,_ScrollView ,CheckBox} from "react-native";
 import React from 'react';
 import AwesomeAlert from 'react-native-awesome-alerts';
-
 import CustomMultiPicker from "react-native-multiple-select-list";
 
 
@@ -14,7 +13,6 @@ export default class PostScreen extends React.Component {
      
       state={
         showAlert: false,
-        GPA: 'added',   
     question:"",
     choice1:"",
      choice2:"",
@@ -100,21 +98,21 @@ vote2=()=>{
         
         <ScrollView>
         
-       <View style={styles.Row2}>
+       <ImageBackground source={require("./Images/post.jpg")}  style={styles.backgriundImage} >
        <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your post"
-          message={`Your post is added`}
+          message={`Your vote is added`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
           }}
         />
+       <View style={styles.Row2}>
            <View style={styles.searchView}>
                 <TextInput placeholder="write Your question" multiline  style={styles.searchtext}
                 onChangeText={(question)=>this.setState({question})}
@@ -167,12 +165,12 @@ renderItem={
                                                
 {/* ///////////question/////////// */}
      <View >      
-    <Text style={{marginLeft:30,fontSize:30,color:"#fff"}}>{item.question}</Text>
+    <Text style={{marginLeft:30,fontSize:18,color:"#fff"}}>{item.question}</Text>
     </View>
 
 {/* //////////////////choice1 and vote1 */}
     <View style={styles.TextCount}>
-            <Text style={{marginLeft:15,fontSize:30,color:"#fff"}}>{item.vote1}</Text>
+            <Text style={{marginLeft:15,fontSize:18,color:"#fff"}}>{item.vote1}</Text>
               </View>
     <TouchableOpacity onPress={()=>{
          this.state.vot=item.choice1
@@ -182,7 +180,7 @@ renderItem={
            <View style={styles.searchView}>
                 <View style={styles.Row}>
                 <MaterialCommunityIcons  size={25}  color='#333'/>
-                <Text style={{marginLeft:15,fontSize:30,}} value={item.choice1}
+                <Text style={{marginLeft:15,fontSize:18,}} value={item.choice1}
                    >{item.choice1}</Text>
                 </View>     
           </View> 
@@ -199,7 +197,7 @@ renderItem={
        
 
             <View style={styles.TextCount}>
-            <Text style={{marginLeft:15,fontSize:30,color:"#fff"}}>{item.vote2}</Text>
+            <Text style={{marginLeft:15,fontSize:18,color:"#fff"}}>{item.vote2}</Text>
               </View>
     <TouchableOpacity onPress={()=>{
          this.state.vot2=item.choice2
@@ -209,7 +207,7 @@ renderItem={
            <View style={styles.searchView}>
                 <View style={styles.Row}>
                 <MaterialCommunityIcons  size={25}  color='#333'/>
-                <Text style={{marginLeft:15,fontSize:30,}} value={item.choice2}
+                <Text style={{marginLeft:15,fontSize:18,}} value={item.choice2}
                    >{item.choice2}</Text>
                 </View>     
           </View> 
@@ -231,6 +229,7 @@ renderItem={
     
   )}
   />
+      </ImageBackground> 
           </ScrollView>
       
       );
@@ -265,13 +264,9 @@ renderItem={
     })
     .then((response)=>response.json())
     .then((res)=>{
-      if(res.success ===true){
-        this.setState({res}, ()=>this.setState({showAlert: true}))
-        this.viewQuestion()        
-       
-      }else{
-        alert(res.message)
-      }
+      this.setState({res}, ()=>this.setState({showAlert: true}))
+
+       this.viewQuestion()
     })
     .done()
   }
@@ -397,13 +392,13 @@ Divider:{
     paddingHorizontal: 20, 
     paddingVertical:7,
     fontSize: 18, 
-    color: "#ccccef"
+    color: "#000"
   },
   votetext:{
     paddingHorizontal: 5, 
     paddingVertical:7,
     fontSize: 15, 
-    color: "#ccccef"
+    color: "#000"
   },
 userlist:{
 width:"30%",

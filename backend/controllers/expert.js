@@ -6,6 +6,8 @@ module.exports = {
 
     var CScounter = 0;
     var IScounter = 0;
+    var CS=" CS";
+    var IS=" IS"
     console.log(answers)
    
 
@@ -269,12 +271,20 @@ module.exports = {
   
 
 
+  if (CScounter > IScounter) {
 
-res.status(200).json({
-  success: true,
-  IS: IScounter,
-  CS: CScounter
-});
+    res.status(200).json({
+      DEPARTMENT : CS
+   
+   }); 
+
+  }
+  else{
+    res.status(200).json({
+      DEPARTMENT : IS
+   
+   }); 
+  }
 }
 
 

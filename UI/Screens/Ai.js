@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Linking, Image,Dimensions , ActivityIndicator, Button, View, TouchableOpacity, Text, TextInput, FlatList, ScrollView, TouchableWithoutFeedback, Animated, Easing, LogBox } from 'react-native';
+import { StyleSheet, Linking,SafeAreaView, Image,Dimensions , ActivityIndicator, Button, View, TouchableOpacity, Text, TextInput, FlatList, ScrollView, TouchableWithoutFeedback, Animated, Easing, LogBox } from 'react-native';
 import * as ImagePicker from "expo-image-picker";
 import { Feather } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
@@ -159,7 +159,7 @@ componentDidMount(){
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
           }}
@@ -248,11 +248,7 @@ renderItem={
             </View>
           </View>
           {this._maybeRenderControls()}
-          <Image
-            source={{ uri: this.state.image }}
-            style={{ width: 400, height: 400 }}
-          />
-
+         
           <FlatList horizontal
 
             keyExtractor={(item, index) => index.toString()}

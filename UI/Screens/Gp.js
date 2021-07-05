@@ -132,17 +132,18 @@ viewvideo=()=>{
     return (
 
       <ScrollView>
+               <ImageBackground source={require("./Images/post.jpg")}  style={styles.backgriundImage} >
+
           <View style={styles.Row2}>
           <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your GPA"
-          message={`Your GPA is ${this.state.GPA}`}
+          message={`You're post added`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
           }}
@@ -153,7 +154,7 @@ viewvideo=()=>{
                 onChangeText={(desc) => this.setState({ desc })}
                 value={this.state.desc}
               />
-        <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
+        <TextInput placeholder="put your gp link" multiline style={styles.searchtext}
                 onChangeText={(URL) => this.setState({ URL })}
                 value={this.state.URL}
               />
@@ -196,7 +197,7 @@ viewvideo=()=>{
                     <View styles={styles.item}>
                       <View style={styles.Header}>
                         <View style={styles.Row}>
-                          <Image source={require('./Images/4.jpg')} style={styles.Profile} />
+                          <Image source={require('./Images/T.png')} style={styles.Profile} />
 
                         </View>
 
@@ -207,17 +208,14 @@ viewvideo=()=>{
                         </View>
 
                       </View>
-                      <View style={styles.Row}>
-                        <View style={styles.ppTime}>
-                          <Text style={styles.ppText}>1/13/2021</Text></View>
-                      </View>
+                    
                      
-<Lightbox>
+                      <Lightbox>
                       <Video
                         source={{ uri: item }}
                         shouldPlay
                         resizeMode="cover"
-                        style={{ width: 500, height: 100 }}
+                        style={{ width: 500, height: 500 }}
                       />
 
 </Lightbox>
@@ -277,6 +275,7 @@ renderItem={
             </View>
 
         </View>
+        </ImageBackground>
       </ScrollView>
 
     );
@@ -388,7 +387,7 @@ const styles = StyleSheet.create({
 
     backgroundColor: "#FFF",
     borderRadius: 40,
-    borderColor: '#333',
+    borderColor: '#000',
     borderWidth: 3,
     width: '70%',
   },
@@ -397,7 +396,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 7,
     fontSize: 15,
-    color: "#ccccef"
+    color: "#000"
   },
 
 

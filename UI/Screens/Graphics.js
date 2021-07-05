@@ -60,13 +60,12 @@ render() {
 <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your post"
           message={`Your link is added`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
           }}

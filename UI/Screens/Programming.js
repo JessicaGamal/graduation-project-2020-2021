@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text,FlatList, TextInput,ScrollView, SafeAreaView } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 export default class AiScreen extends React.Component {
   state = {
-   
+    showAlert: false,
     tutoriallink: '',
     tutoriallink2:'',
     Tutorials: [],
@@ -53,6 +54,19 @@ render() {
         </Image>
       <ScrollView>
       <View style={styles.container}> 
+      <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          message={`Your link is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#009F7D"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
 
 
 

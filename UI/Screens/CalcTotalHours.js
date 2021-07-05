@@ -94,13 +94,12 @@ import AwesomeAlert from 'react-native-awesome-alerts';
       <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your GPA"
-          message={`Your GPA is ${this.state.GPA}`}
+          message={`Your Total Hours is ${this.state.GPA}`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
           confirmText="OK"
-          confirmButtonColor="#DD6B55"
+          confirmButtonColor="#009F7D"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
           }}

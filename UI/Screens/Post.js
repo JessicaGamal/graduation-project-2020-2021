@@ -4,6 +4,7 @@ import { View, Text, Image, StyleSheet,ImageBackground,TextInput ,_ScrollView ,F
 import React from 'react';
 import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 import CollapsibleList from "react-native-collapsible-list";
 
@@ -31,6 +32,7 @@ export default class PostScreen extends React.Component {
     collapsed: true,
     multipleSelect: false,
     posts:[],
+    showAlert: false,
     content:"",
     commentContent:""
    // comments:[]
@@ -103,7 +105,7 @@ ViewAllPosts=()=> {
   _keyExtractor = (item, index) => item._id.toString();
 
   createComment =(postId)=>{
-     alert(postId);
+   
     this.addComment(postId,this.state.commentContent);
   } 
   
@@ -178,9 +180,21 @@ ViewAllPosts=()=> {
       return (
         
         <ScrollView>
-         
+         <ImageBackground source={require("./Images/post.jpg")}  style={styles.backgriundImage} >
             <View style={styles.Row2}>
-          
+            <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          message={`Your post is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#009F7D"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
               <Image source={require('./Images/p1.jpg')} style={styles.Profile}/>
               <View style={styles.searchView}>
                 <TextInput placeholder="Write your question" multiline  style={styles.searchtext}
@@ -215,7 +229,7 @@ ViewAllPosts=()=> {
                 </View>
 
                 <View style={styles.Post}>
-                    <Text style={styles.item}>{item.content}</Text>
+                    <Text style={styles.commenttext1}>{item.content}</Text>
                 </View>
             
               <View style={styles.Footer}>
@@ -259,7 +273,7 @@ ViewAllPosts=()=> {
                           <Image source={require('./Images/p2.jpg')} style={styles.Profile}/>
                           <View style={{ paddingLeft: 10 }}>
                             <View style={styles.User}>
-                              <Text style={styles.ppText}>Sara Samoul</Text>
+                              <Text style={styles.ppText}>Nourhan Magdy</Text>
                             </View>
                             <View style={styles.Row}>
                             </View>
@@ -358,7 +372,7 @@ ViewAllPosts=()=> {
                   />
 
 			    </View>
-      
+          </ImageBackground>
         </ScrollView>
       
       );
@@ -462,12 +476,12 @@ ViewAllPosts=()=> {
   },
   ppText:{
     fontSize: 14,
-    color: "#333",
+    color: "#fff",
     fontWeight:'bold',
   },
   Textblack:{
     fontSize: 14,
-    color: "#333",
+    color: "#fff",
     marginLeft:-5,
   },
  BottomDivider:{
@@ -498,7 +512,7 @@ Divider:{
     },
   searchView:{
     
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff",
     borderRadius: 40,
     borderColor: '#333', 
     borderWidth: 3, 
@@ -508,7 +522,7 @@ Divider:{
     
     backgroundColor: "#FFF",
     borderRadius: 40,
-    borderColor: '#333', 
+    borderColor: '#fff', 
     borderWidth: 3, 
     width: '90%',
   },
@@ -516,13 +530,19 @@ Divider:{
     paddingHorizontal: 20, 
     paddingVertical:7,
     fontSize: 15, 
-    color: "#ccccef"
+    color: "#000"
   },
   commenttext:{
     paddingHorizontal: 20, 
     paddingVertical:7,
     fontSize: 15, 
-    color: '#333'
+    color: '#000'
+  },
+  commenttext1:{
+    paddingHorizontal: 20, 
+    paddingVertical:7,
+    fontSize: 15, 
+    color: '#fff'
   },
   header2: {
     padding: 0,

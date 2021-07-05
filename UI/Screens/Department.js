@@ -16,7 +16,7 @@ export default class  DepartmentScreen extends React.Component {
         
       <View style={styles.titlestyle}>
             <Text style={styles.titletextstyle}>
-              ...Departments.. 
+              ..Departments.. 
             </Text>
             </View>
             

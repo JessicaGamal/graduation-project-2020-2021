@@ -9,6 +9,7 @@ export default class AiScreen extends React.Component {
 
   
   state = {
+    showAlert: false,
     firstRate: 2,
     secondRate: 1,
     courselink: '',
@@ -98,7 +99,7 @@ export default class AiScreen extends React.Component {
   };
  viewcourse=()=> {
  
-  fetch('http://192.168.1.7:3000/viewcourse',{
+  fetch('http://192.168.1.8:3000/viewcourse',{
     method:'GET',
     headers:{
       'Accept':'application/json',
@@ -114,7 +115,7 @@ export default class AiScreen extends React.Component {
   
 
   viewimage=()=> {
-    fetch('http://192.168.1.7:3000/viewimage', {
+    fetch('http://192.168.1.8:3000/viewimage', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -145,6 +146,19 @@ componentDidMount(){
 
         <Image source={require('./Images/MM.jpg')} style={styles.backgriundImage}>
         </Image>
+        <AwesomeAlert
+          show={this.state.showAlert}
+          showProgress={false}
+          message={`Your link is added`}
+          closeOnTouchOutside={true}
+          closeOnHardwareBackPress={false}
+          showConfirmButton={true}
+          confirmText="OK"
+          confirmButtonColor="#009F7D"
+          onConfirmPressed={() => {
+           this.setState({showAlert: false})
+          }}
+        />
         <View style={styles.Header}>
           <Text style={styles.text}>About Multimedia Course</Text>
         </View>
@@ -272,7 +286,7 @@ renderItem={
   add = () => {
 
 
-    fetch('http://192.168.1.5:3000/addcourse', {
+    fetch('http://192.168.1.8:3000/addcourse', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
