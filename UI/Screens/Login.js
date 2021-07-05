@@ -3,6 +3,7 @@ import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Butt
 import 'react-native-gesture-handler';
 import * as SecureStore from 'expo-secure-store';
 
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 
 export default class Login extends Component {
@@ -24,8 +25,7 @@ export default class Login extends Component {
            <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your post"
-          message={`Your post is added`}
+          message={`You're LogedIN`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
@@ -33,6 +33,8 @@ export default class Login extends Component {
           confirmButtonColor="#DD6B55"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
+           this.props.navigation.replace('StartScreen')
+
           }}
         />
         <View style={styles.inputView} >
@@ -92,16 +94,10 @@ export default class Login extends Component {
     })
     .then((response)=>response.json())
     .then((res)=>{
-      if(res.success ===true){
       
         this.setState({res}, ()=>this.setState({showAlert: true}))
-        this.props.navigation.replace('StartScreen')
-       
-      }else{
-        alert(res.message)
-      }
+     
     })
-    .done()
   }
 }
 

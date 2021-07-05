@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image } from 'react-native';
 export default class Signup extends Component {
   constructor(props) {
@@ -36,6 +38,8 @@ export default class Signup extends Component {
           confirmButtonColor="#DD6B55"
           onConfirmPressed={() => {
            this.setState({showAlert: false})
+           this.props.navigation.replace('LoginScreen')
+
           }}
         />
         <View style={styles.inputView} >
@@ -123,11 +127,9 @@ export default class Signup extends Component {
      
     }
     catch(error){
-alert(error)
 
     }
     
-    alert(JSON.stringify(this.state.formdata));
   }
 }
 const styles = StyleSheet.create({
