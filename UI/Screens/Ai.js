@@ -6,6 +6,7 @@ import { EvilIcons } from '@expo/vector-icons';
 import {YellowBox} from 'react-native';
 import Lightbox from 'react-native-lightbox';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { SafeAreaView } from 'react-navigation';
 
 export default class AiScreen extends React.Component {
 
@@ -144,7 +145,9 @@ componentDidMount(){
   const { height } = Dimensions.get('screen');
 
     return (
-
+      <SafeAreaView style={{flex:1}}>
+    <Image source={require('./Images/AI.jpg')} style={styles.backgriundImage}>
+        </Image>
       <ScrollView style={styles.container}>
  <AwesomeAlert
           show={this.state.showAlert}
@@ -160,8 +163,7 @@ componentDidMount(){
            this.setState({showAlert: false})
           }}
         />
-        <Image source={require('./Images/AI.jpg')} style={styles.backgriundImage}>
-        </Image>
+    
         <View style={styles.Header}>
           <Text style={styles.text}>About Artificial Intelligence Course</Text>
         </View>
@@ -276,6 +278,8 @@ renderItem={
         </View>
 
       </ScrollView>
+      </SafeAreaView>
+
     );
   }
 
