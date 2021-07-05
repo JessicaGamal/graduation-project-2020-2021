@@ -2,8 +2,9 @@ import {Entypo, MaterialCommunityIcons, } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View,FlatList, Text, Image, StyleSheet,ImageBackground,TextInput,_ScrollView ,CheckBox} from "react-native";
 import React from 'react';
-import CustomMultiPicker from "react-native-multiple-select-list";
 import AwesomeAlert from 'react-native-awesome-alerts';
+
+import CustomMultiPicker from "react-native-multiple-select-list";
 
 
 
@@ -13,7 +14,7 @@ export default class PostScreen extends React.Component {
      
       state={
         showAlert: false,
-        GPA: 'added',  
+        GPA: 'added',   
     question:"",
     choice1:"",
      choice2:"",
@@ -63,7 +64,6 @@ vote1=()=>{
       if(responseData){
        
         alert("done")
-  
       }
 
     return responseData;})
@@ -89,6 +89,7 @@ vote2=()=>{
        
         alert("done")
       }
+
     return responseData;})
 
 }
@@ -99,7 +100,7 @@ vote2=()=>{
         
         <ScrollView>
         
-       <ImageBackground source={require("./Images/w3.jpg")}  style={styles.backgriundImage} >
+       <View style={styles.Row2}>
        <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
@@ -114,7 +115,6 @@ vote2=()=>{
            this.setState({showAlert: false})
           }}
         />
-       <View style={styles.Row2}>
            <View style={styles.searchView}>
                 <TextInput placeholder="write Your question" multiline  style={styles.searchtext}
                 onChangeText={(question)=>this.setState({question})}
@@ -163,10 +163,6 @@ renderItem={
                           <Text style={styles.ppText}>Nourhan Magdy</Text>
                         </View>
 
-                      </View>
-                      <View style={styles.Row}>
-                        <View style={styles.ppTime}>
-                          <Text style={styles.ppText}>1/13/2021</Text></View>
                       </View>
                                                
 {/* ///////////question/////////// */}
@@ -235,7 +231,6 @@ renderItem={
     
   )}
   />
-      </ImageBackground> 
           </ScrollView>
       
       );
@@ -270,9 +265,13 @@ renderItem={
     })
     .then((response)=>response.json())
     .then((res)=>{
-      this.setState({res}, ()=>this.setState({showAlert: true}))
-  this.viewQuestion()
-  
+      if(res.success ===true){
+        this.setState({res}, ()=>this.setState({showAlert: true}))
+        this.viewQuestion()        
+       
+      }else{
+        alert(res.message)
+      }
     })
     .done()
   }

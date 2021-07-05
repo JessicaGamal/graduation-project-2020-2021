@@ -11,9 +11,9 @@ import * as ImagePicker from "expo-image-picker";
 export default class PostScreen extends React.Component {
 
   state = {
-    showAlert: false,
-    add: 'added',
     desc: '',
+    showAlert: false,
+    GPA: 2,
     data:[],
     description:[],
     URL:'',
@@ -96,7 +96,6 @@ export default class PostScreen extends React.Component {
       .then((res) => {
         this.setState({res}, ()=>this.setState({showAlert: true}))
         this.viewdesc();
-
       })
       .done()
   }
@@ -133,20 +132,12 @@ viewvideo=()=>{
     return (
 
       <ScrollView>
-
-        <ImageBackground source={require("./Images/w3.jpg")} style={styles.backgriundImage} >
           <View style={styles.Row2}>
-            <Image source={require('./Images/p1.jpg')} style={styles.Profile} />
-            <View style={styles.searchView}>
-            <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
-                onChangeText={(desc) => this.setState({ desc })}
-                value={this.state.desc}
-              />
-               <AwesomeAlert
+          <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
-          title="Displaying your post"
-          message={`Your post is ${this.state.add}`}
+          title="Displaying your GPA"
+          message={`Your GPA is ${this.state.GPA}`}
           closeOnTouchOutside={true}
           closeOnHardwareBackPress={false}
           showConfirmButton={true}
@@ -156,6 +147,12 @@ viewvideo=()=>{
            this.setState({showAlert: false})
           }}
         />
+            <Image source={require('./Images/p1.jpg')} style={styles.Profile} />
+            <View style={styles.searchView}>
+            <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
+                onChangeText={(desc) => this.setState({ desc })}
+                value={this.state.desc}
+              />
         <TextInput placeholder="write your GP idea" multiline style={styles.searchtext}
                 onChangeText={(URL) => this.setState({ URL })}
                 value={this.state.URL}
@@ -220,7 +217,7 @@ viewvideo=()=>{
                         source={{ uri: item }}
                         shouldPlay
                         resizeMode="cover"
-                        style={{ width: 500, height: 500 }}
+                        style={{ width: 500, height: 100 }}
                       />
 
 </Lightbox>
@@ -253,10 +250,6 @@ renderItem={
         </View>
 
       </View>
-      <View style={styles.Row}>
-        <View style={styles.ppTime}>
-          <Text style={styles.ppText}>1/13/2021</Text></View>
-      </View>
      
       <View style={{flexDirection:'row',padding:5,marginBottom:5,backgroundColor:'lightgray',borderRadius:12}}>
       <Text >{item.desc}</Text>
@@ -284,7 +277,6 @@ renderItem={
             </View>
 
         </View>
-        </ImageBackground>
       </ScrollView>
 
     );
@@ -413,7 +405,6 @@ const styles = StyleSheet.create({
 
 
 async function uploadImageAsync(uri) {
-  
   let apiUrl = "http://192.168.1.8:3000/video"
   let uriArray = uri.split(".");
   let fileType = uriArray[uriArray.length - 1];
@@ -426,6 +417,7 @@ async function uploadImageAsync(uri) {
     name: `video.${fileType}`,
     type: `video/${fileType}`,
   });
+  // formData.append('desc', desc);
 
   console.log(uri)
 
@@ -437,10 +429,8 @@ async function uploadImageAsync(uri) {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
     },
-    
   };
 
   return fetch(apiUrl, options);
-  
 }
 

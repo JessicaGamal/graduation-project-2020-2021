@@ -8,12 +8,12 @@ export default class  DepartmentScreen extends React.Component {
       return (
         
         <ImageBackground
-        source={require("./Images/w2.jpg")}
+        source={require("./Images/Home.jpg")}
         style={styles.backgriundImage}
         >
             <View style={{justifyContent:"center"}}>
             <ScrollView>
-        
+         
               <View style={styles.titlestyle}>
               <Text style={styles.titletextstyle}>Summer Time</Text>
               </View>
@@ -21,72 +21,36 @@ export default class  DepartmentScreen extends React.Component {
         <View style={styles.header}>
           
              
-                <View>
+                <View style={{paddingBottom:20}}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
+                  onPress={() => this.props.navigation.navigate("webDesign")}
                   style={styles.button } >
-                  <Text style={styles.text}>Production&Video</Text>
+                  <Text style={styles.text}>Web Design</Text>
                 </TouchableOpacity>
-                
                 </View>
-                <View>
+
+                <View style={{paddingBottom:20}}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
+                  onPress={() => this.props.navigation.navigate("Graphics")}
                   style={styles.button} >
                   <Text style={styles.text}>Graphics</Text>
                 </TouchableOpacity>
-                
                 </View>
                
-                <View>
+                <View style={{paddingBottom:20}}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
+                  onPress={() => this.props.navigation.navigate("Programming")}
                   style={styles.button} >
                   <Text style={styles.text}>Programming</Text>
                 </TouchableOpacity>
-                
                 </View>
-                <View>
+
+                <View style={{paddingBottom:20}}>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
+                  onPress={() => this.props.navigation.navigate("DB")}
                   style={styles.button} >
                   <Text style={styles.text}>DB admin.</Text>
                 </TouchableOpacity>
-                
-                </View>
-  
-                <View>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
-                  style={styles.button } >
-                  <Text style={styles.text}>Production&Video</Text>
-                </TouchableOpacity>
-                
-                </View>
-                <View>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
-                  style={styles.button} >
-                  <Text style={styles.text}>Graphics</Text>
-                </TouchableOpacity>
-                
-                </View>
-               
-                <View>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
-                  style={styles.button} >
-                  <Text style={styles.text}>Programming</Text>
-                </TouchableOpacity>
-                
-                </View>
-                <View>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Pv")}
-                  style={styles.button} >
-                  <Text style={styles.text}>DB admin.</Text>
-                </TouchableOpacity>
-                
                 </View>
               
               </View>
@@ -112,33 +76,37 @@ export default class  DepartmentScreen extends React.Component {
   
     ////////////////////////////
     header:{
-     paddingHorizontal: 20, 
+      alignItems:"center",
+      justifyContent: "center"
     
     },
    text:
    {
-     fontSize:14,
+     fontSize:18,
      color:"#333",
      fontWeight:'bold',
      fontStyle:'italic'
   },
     ////////////////////////////
     button:{
-      alignItems: "center", 
-      justifyContent: "center",  
-      height: 40, 
-      width: 120, 
+      height: 50, 
+      width: 180, 
       borderRadius: 15, 
       backgroundColor: "#A1DED2",
       marginHorizontal:1,
-      marginVertical:5, 
+      marginVertical:9, 
+      alignItems:"center",
+      justifyContent: "center"
     },
     
     titlestyle:
     {
       padding:5 ,
+      paddingBottom:20,
       marginTop:20,
       marginHorizontal:15,
+      alignItems:"center",
+      justifyContent: "center"
     },
     ////////////////////
     titletextstyle:
@@ -146,10 +114,12 @@ export default class  DepartmentScreen extends React.Component {
       fontWeight: 'bold',
       fontSize: 40,
       color:'#fff',
-      textDecorationLine: 'underline',
+      textDecorationLine: 'none',
       fontStyle: 'italic',
       textShadowOffset:{width: 6, height: 6},
       textShadowRadius:20,
+      alignItems:"center",
+      justifyContent: "center",
     },
     
 

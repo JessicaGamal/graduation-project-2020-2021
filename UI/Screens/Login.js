@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Alert , StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Button, AsyncStorage } from 'react-native';
 import 'react-native-gesture-handler';
 import * as SecureStore from 'expo-secure-store';
-
 import AwesomeAlert from 'react-native-awesome-alerts';
+
 
 
 export default class Login extends Component {
@@ -17,12 +17,11 @@ export default class Login extends Component {
   render(){
     return (
       <View style={styles.container}>
-
         <Image
         style={styles.tinyLogo}
-        source={require('./Images/my-icon5.png')}
+        source={require('./Images/T.png')}
         />
-           <AwesomeAlert
+         <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
           message={`You're LogedIN`}
@@ -56,7 +55,8 @@ export default class Login extends Component {
             value={this.state.password}/>
         </View>
         <TouchableOpacity
-          onPress={this.login}
+        onPress={() => 
+          this.props.navigation.replace('StartScreen')}
         style={styles.loginBtn}>
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
@@ -87,19 +87,20 @@ export default class Login extends Component {
         'Accept':'application/json',
         'Content-Type':'application/json'
       },
-        body:JSON.stringify({
-          email:this.state.email,
-          password:this.state.password,
-        })
-    })
-    .then((response)=>response.json())
-    .then((res)=>{
-      
-        this.setState({res}, ()=>this.setState({showAlert: true}))
-     
-    })
-  }
+      body:JSON.stringify({
+        email:this.state.email,
+        password:this.state.password,
+      })
+  })
+  .then((response)=>response.json())
+  .then((res)=>{
+    
+      this.setState({res}, ()=>this.setState({showAlert: true}))
+   
+  })
 }
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -109,9 +110,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tinyLogo: {
-    width: 240,
-    height: 80,
-    marginBottom:20
+    width: 270,
+    height: 200,
+    marginBottom:10
     
   },
   inputView:{

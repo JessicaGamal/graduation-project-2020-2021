@@ -132,7 +132,7 @@ import AwesomeAlert from 'react-native-awesome-alerts';
           const total = responseData.total;
           
           console.log(total); 
-          this.setState({Totalhours: total}, ()=>this.setState({showAlert: true}))
+          this.setState({GPA: total}, ()=>this.setState({showAlert: true}))
           
         }
 

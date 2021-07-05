@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AwesomeAlert from 'react-native-awesome-alerts';
-
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity, Image } from 'react-native';
 export default class Signup extends Component {
   constructor(props) {
@@ -26,7 +25,8 @@ export default class Signup extends Component {
           style={styles.tinyLogo}
           source={require('./Images/my-icon5.png')}
         />
-           <AwesomeAlert
+        <View style={styles.inputView} >
+        <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
           title="Displaying your post"
@@ -42,7 +42,6 @@ export default class Signup extends Component {
 
           }}
         />
-        <View style={styles.inputView} >
           <TextInput
             style={styles.inputText}
             placeholder="Username"
@@ -127,9 +126,11 @@ export default class Signup extends Component {
      
     }
     catch(error){
+alert(error)
 
     }
     
+    alert(JSON.stringify(this.state.formdata));
   }
 }
 const styles = StyleSheet.create({

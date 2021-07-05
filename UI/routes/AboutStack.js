@@ -9,7 +9,7 @@ const screens = {
     screen: About,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header title='Artificial Intelligence' navigation={navigation} />
+        headerTitle: () => <Header title='About Our Faculty' navigation={navigation} />
       }
     }
   },

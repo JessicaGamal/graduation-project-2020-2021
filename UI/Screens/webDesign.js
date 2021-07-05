@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text,FlatList, TextInput,ScrollView, } from 'react-native';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import { StyleSheet, View, Image, TouchableOpacity, Text,FlatList, TextInput,ScrollView, SafeAreaView } from 'react-native';
+
 
 export default class AiScreen extends React.Component {
   state = {
-    showAlert: false,
+   
     tutoriallink: '',
     tutoriallink2:'',
     Tutorials: [],
@@ -12,7 +12,7 @@ export default class AiScreen extends React.Component {
   };
   viewtutorials=()=> {
  
-    fetch('http://192.168.1.8:3000/viewtutorials',{
+    fetch('http://192.168.1.7:3000/viewtutorials',{
       method:'GET',
       headers:{
         'Accept':'application/json',
@@ -28,7 +28,7 @@ export default class AiScreen extends React.Component {
     
   
       viewtutorials2=()=> {
-      fetch('http://192.168.1.8:3000/viewtutorials2', {
+      fetch('http://192.168.1.7:3000/viewtutorials2', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -48,22 +48,13 @@ export default class AiScreen extends React.Component {
   }
 render() {
     return (
-      <ScrollView style={styles.container}> 
+      <SafeAreaView style={{flex:1}}>
+        <Image source={require('./Images/web.jpg')} style={styles.backgriundImage}>
+        </Image>
+      <ScrollView>
+      <View style={styles.container}> 
 
-<AwesomeAlert
-          show={this.state.showAlert}
-          showProgress={false}
-          title="Displaying your post"
-          message={`Your link is added`}
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={false}
-          showConfirmButton={true}
-          confirmText="OK"
-          confirmButtonColor="#DD6B55"
-          onConfirmPressed={() => {
-           this.setState({showAlert: false})
-          }}
-        />
+
 
        <View style={styles.inputThree}>
           <View style={styles.HeaderTwo}>
@@ -75,8 +66,9 @@ render() {
 
 
           <View style={styles.Header}>
-            <Text style={styles.text}>Artificial Intelligence (AI) is a rapidly advancing technology, 
-              Made possible by the Internet.</Text>    
+            <Text style={styles.text}>
+              Web design encompasses many different skills and disciplines in the production and maintenance of websites. The different areas of web design include web graphic design; user interface design (UI design); authoring, including standardised code and proprietary software.
+            </Text>    
           </View>
 
 
@@ -85,7 +77,7 @@ render() {
           <View style={styles.inputTwo}>
           
               <View style={styles.HeaderTwo}>
-                <Text style={styles.textTwo}>Step 1 : Photography</Text>    
+                <Text style={styles.textTwo}>Step 1 : Requirements</Text>    
               </View>
               
 
@@ -140,7 +132,7 @@ renderItem={
           <View style={styles.inputTwo}>
           
           <View style={styles.HeaderTwo}>
-            <Text style={styles.textTwo}>Step 2 : Video production</Text>    
+            <Text style={styles.textTwo}>Step 2 : Practice</Text>    
           </View>
           
 
@@ -189,7 +181,9 @@ renderItem={
           </View>
       </View>
         
+        </View>
         </ScrollView>
+        </SafeAreaView>
     );}
     constructor(props) {
       super()
@@ -201,7 +195,7 @@ renderItem={
     AddTutorial = () => {
   
   
-      fetch('http://192.168.1.8:3000/addtutoriallink', {
+      fetch('http://192.168.1.7:3000/addtutoriallink', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -215,8 +209,8 @@ renderItem={
       })
         .then((response) => response.json())
         .then((res) => {
-          this.setState({res}, ()=>this.setState({showAlert: true}))
-        this.viewtutorials()
+          alert("link uplode")
+  
         })
         .done()
     }
@@ -227,7 +221,6 @@ renderItem={
 }
 const styles = StyleSheet.create({
   container: {
-    flex: 5, 
     paddingLeft:5,
     paddingRight:5,
     //backgroundColor: '#89E1C4',
@@ -302,7 +295,6 @@ text:{
 },
 textTwo:{
   fontWeight: 'bold',
-
   fontSize: 20,
   color:'#33BBC1',
   textDecorationLine: 'underline',
@@ -320,5 +312,10 @@ Link:{
 courseNameComponent: {
   alignItems: 'flex-start',
 
+},
+backgriundImage: {
+  width:'100%',
+  height: '30%',
+  justifyContent: 'center',
 },
 });

@@ -15,7 +15,10 @@ import  Ai from '../Screens/Ai';
 import  Gp from '../Screens/Gp';
 import  Vote from '../Screens/Vote';
 import  SummerTime from '../Screens/SummerTime';
-import Pv from '../Screens/Pv';
+import webDesign from '../Screens/webDesign';
+import Graphics from '../Screens/Graphics';
+import Programming from '../Screens/Programming';
+import DB from '../Screens/DB';
 import DWH from '../Screens/DWH';
 import MM from '../Screens/MM';
 import DSS from '../Screens/DSS';
@@ -129,12 +132,31 @@ const screens = {
       title: 'SummerTime',
     }  
   },
- Pv : {
-  screen:  Pv,
+ webDesign : {
+  screen:  webDesign,
   navigationOptions: {
-    title: 'P&V',
+    title: 'Web Design',
   }  
 },
+Programming : {
+  screen:  Programming,
+  navigationOptions: {
+    title: 'Programming',
+  }  
+},
+Graphics : {
+  screen:  Graphics,
+  navigationOptions: {
+    title: 'Graphics',
+  }  
+},
+DB : {
+  screen:  DB,
+  navigationOptions: {
+    title: 'DB Admin',
+  }  
+},
+
 };
 
 // home stack navigator screens

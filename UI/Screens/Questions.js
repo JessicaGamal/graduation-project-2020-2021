@@ -7,24 +7,24 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 const CONTENT = [
   {
-    title: 'First Question',
-    content: 'NOURHAN',
+    title: 'What are the required number of hours needed to register for graduation project?',
+    content: 'From 102 hours',
   },
   {
-    title: 'Second Question',
-    content: 'DALIA',
+    title: 'What are the required number of hours needed for graduation?',
+    content: 'From 144 hours',
   },
   {
-    title: 'Third Question',
-    content: 'SARA',
+    title: 'Can I register for the graduation project in the second term?',
+    content: 'Yes, you can. Especially when you achieve the required number of hours',
   },
   {
-    title: 'Fourth Question',
-    content: 'JESSICA',
+    title: 'What is the prerequisites courses i have to finish to enter the information system Graduation project?',
+    content: 'You have to finish system analysis 1 course successfully',
   },
   {
-    title: 'Fifth Question',
-    content: 'MIRA',
+    title: 'What is the prerequisites courses i have to finish to enter the computer science Graduation project?',
+    content: 'You have to finish programming language 2 course successfully',
   },
 ];
 
@@ -82,9 +82,9 @@ export default class Questions extends Component {
     return (
       <View style={styles.container}>
         
-        <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
+        <ScrollView style={{backgroundColor:'#ffffff'}} contentContainerStyle={{ paddingTop: 30 }}>
         
-        <Image source={require('./Images/11.jpg')} style={styles.backgriundImage}>
+        <Image source={require('./Images/Q.jpg')} style={styles.backgriundImage}>
           </Image>
           
        
@@ -115,17 +115,13 @@ export default class Questions extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
     
   },
  
   backgriundImage: {
     flex: 1,
-   
     marginRight:0,
-    marginLeft:10,
-    resizeMode: 'cover',
-    width: '95%',
+    width: '100%',
     justifyContent: 'center',
     borderRadius:5,
   },

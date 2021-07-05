@@ -3,13 +3,16 @@ import {MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View, Text, Image, ImageBackground, TextInput, StyleSheet } from "react-native";
 import Lightbox from 'react-native-lightbox';
+import {YellowBox} from 'react-native';
 
 export default class HomeScreen extends React.Component {
     render() {
+      YellowBox.ignoreWarnings(['Warning: ...']);
+      console.disableYellowBox = true;
       return (
         <ScrollView>
         <ImageBackground
-          source={require("./Images/18.jpg")}
+          source={require("./Images/Home.jpg")}
           style={styles.backgriundImage}
         >
         
@@ -113,9 +116,7 @@ export default class HomeScreen extends React.Component {
                        <Text style={styles.buttontwotextstyle} >
                             Calculate your current GPA 
                        </Text>
-                       <Text style={styles.buttontwotexttwostyle} >
-                            Level 4 
-                       </Text>
+
                      </View>
                   </View>
                 </View>
@@ -131,9 +132,7 @@ export default class HomeScreen extends React.Component {
                        <Text style={styles.buttontwotextstyle} >
                             Calculate total hours 
                        </Text>
-                       <Text style={styles.buttontwotexttwostyle} >
-                            Level 4 
-                       </Text>
+
                      </View>
                   </View>
                 </View>
@@ -150,9 +149,6 @@ export default class HomeScreen extends React.Component {
                        <Text style={styles.buttontwotextstyle} >
                             Your suitable department 
                        </Text>
-                       <Text style={styles.buttontwotexttwostyle} >
-                            Expert 
-                       </Text>
                      </View>
                   </View>
                 </View>
@@ -167,9 +163,6 @@ export default class HomeScreen extends React.Component {
                      <View style={styles.buttontwotextview} >
                        <Text style={styles.buttontwotextstyle} >
                             Your Summer-time 
-                       </Text>
-                       <Text style={styles.buttontwotexttwostyle} >
-                            Level 4 
                        </Text>
                      </View>
                   </View>
@@ -388,7 +381,7 @@ export default class HomeScreen extends React.Component {
     ////////////////////////////
     searchView:{
       flexDirection: "row",
-      backgroundColor: "#FFF",
+      backgroundColor: "#DEDEDE",
       borderRadius: 40,
       borderColor: '#A1DED2', 
       borderWidth: 3, 
@@ -483,16 +476,20 @@ export default class HomeScreen extends React.Component {
     ////////////////////
     titletextstyle:
     {
-      fontWeight: 'bold',
       fontSize: 30,
-      color:'#fff',
+      color:'#ffffff',
       //textDecorationLine: 'underline',
+      fontWeight: 'bold',
+      textDecorationLine: 'none',
+      fontStyle: 'normal',
+      textShadowOffset:{width: 3, height: 3},
+      textShadowRadius:20,
       
     },
     buttontwo:
     {
       //backgroundColor: "#D1F2EB", 
-      backgroundColor: "#eee", 
+      backgroundColor: "#DEDEDE", 
       padding: 5, 
       flexDirection:'row',  
       marginVertical:10,

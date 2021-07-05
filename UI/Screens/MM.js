@@ -146,7 +146,7 @@ componentDidMount(){
         <Image source={require('./Images/MM.jpg')} style={styles.backgriundImage}>
         </Image>
         <View style={styles.Header}>
-          <Text style={styles.text}>About Artificial Intelligence Course</Text>
+          <Text style={styles.text}>About Multimedia Course</Text>
         </View>
         <View style={styles.inputTwo}>
           <View style={styles.inputThree}>
@@ -155,13 +155,13 @@ componentDidMount(){
             </View>
           </View>
           <View >
-            <Text >Artificial Intelligence (AI) is a rapidly advancing technology,
-            Made possible by the Internet, that may soon have significant impacts on our everyday lives.
-            AI traditionally refers to an artificial creation of human-like intelligence that can learn, R
-            eason, plan, perceive, or process natural language[1] .
-            These traits allow AI to bring immense socioeconomic opportunities,
-            while also posing ethical and socio-economic challenges.
-              As AI is an Internet enabled technology</Text>
+            <Text >
+            Multimedia can have a many definitions these include:
+            Multimedia means that computer information can be represented through audio, video, and animation in addition to traditional media (i.e., text, graphics drawings, images).
+            A good general definition is:
+            Multimedia is the field concerned with the computer-controlled integration of text, graphics, drawings, still and moving images (Video), animation, audio, and any other media where every type of information can be represented, stored, transmitted and processed digitally.
+
+            </Text>
 
           </View>
 

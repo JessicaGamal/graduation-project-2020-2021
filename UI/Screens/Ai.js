@@ -6,7 +6,6 @@ import { EvilIcons } from '@expo/vector-icons';
 import {YellowBox} from 'react-native';
 import Lightbox from 'react-native-lightbox';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import { SafeAreaView } from 'react-navigation';
 
 export default class AiScreen extends React.Component {
 
@@ -99,6 +98,7 @@ export default class AiScreen extends React.Component {
     } finally {
       this.setState({ uploading: false });
       this.viewimage()
+
     }
   };
  viewcourse=()=> {
@@ -146,10 +146,11 @@ componentDidMount(){
 
     return (
       <SafeAreaView style={{flex:1}}>
-    <Image source={require('./Images/AI.jpg')} style={styles.backgriundImage}>
+ <Image source={require('./Images/AI.jpg')} style={styles.backgriundImage}>
         </Image>
       <ScrollView style={styles.container}>
- <AwesomeAlert
+       
+        <AwesomeAlert
           show={this.state.showAlert}
           showProgress={false}
           title="Displaying your post"
@@ -163,7 +164,6 @@ componentDidMount(){
            this.setState({showAlert: false})
           }}
         />
-    
         <View style={styles.Header}>
           <Text style={styles.text}>About Artificial Intelligence Course</Text>
         </View>
@@ -174,13 +174,9 @@ componentDidMount(){
             </View>
           </View>
           <View >
-            <Text >Artificial Intelligence (AI) is a rapidly advancing technology,
-            Made possible by the Internet, that may soon have significant impacts on our everyday lives.
-            AI traditionally refers to an artificial creation of human-like intelligence that can learn, R
-            eason, plan, perceive, or process natural language[1] .
-            These traits allow AI to bring immense socioeconomic opportunities,
-            while also posing ethical and socio-economic challenges.
-              As AI is an Internet enabled technology</Text>
+            <Text >
+            Artificial intelligence (AI), the ability of a digital computer or computer-controlled robot to perform tasks commonly associated with intelligent beings. The term is frequently applied to the project of developing systems endowed with the intellectual processes characteristic of humans, such as the ability to reason, discover meaning, generalize, or learn from past experience.
+            </Text>
 
           </View>
 
@@ -279,7 +275,6 @@ renderItem={
 
       </ScrollView>
       </SafeAreaView>
-
     );
   }
 
@@ -307,10 +302,9 @@ renderItem={
       .then((response) => response.json())
       .then((res) => {
         this.setState({res}, ()=>this.setState({showAlert: true}))
-      this.viewcourse()
+        this.viewcourse()
       })
       .done()
-      
   }
 
 

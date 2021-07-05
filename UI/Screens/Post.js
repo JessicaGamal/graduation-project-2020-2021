@@ -2,7 +2,6 @@ import {Entypo, MaterialCommunityIcons, } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { View, Text, Image, StyleSheet,ImageBackground,TextInput ,_ScrollView ,FlatList} from "react-native";
 import React from 'react';
-import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
 
@@ -32,7 +31,6 @@ export default class PostScreen extends React.Component {
     collapsed: true,
     multipleSelect: false,
     posts:[],
-    showAlert: false,
     content:"",
     commentContent:""
    // comments:[]
@@ -47,7 +45,7 @@ _updateSections = (activeSections) => {
   this.setState({ activeSections });
 };
 ViewAllPosts=()=> {
-  fetch('http://192.168.1.7:3000/ViewAllPosts', {
+  fetch('http://192.168.1.8:3000/ViewAllPosts', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -65,7 +63,7 @@ ViewAllPosts=()=> {
   console.log(JSON.stringify({
     contnet:this.state.contnet
   }));
-  await fetch('http://192.168.1.7:3000/AddPost',{
+  await fetch('http://192.168.1.8:3000/AddPost',{
     method:'POST',
     method:'POST',
     headers:{
@@ -83,9 +81,9 @@ ViewAllPosts=()=> {
   .then((res)=>{
     console.log(res);
     if(res.success ===true){
-   // console.log("hnaaaaaaaaaa");
-   this.setState({res}, ()=>this.setState({showAlert: true}))
-   this.ViewAllPosts();
+      this.setState({res}, ()=>this.setState({showAlert: true}))
+
+    this.ViewAllPosts();
      
     }else{
       alert(res.message)
@@ -112,7 +110,7 @@ ViewAllPosts=()=> {
 
   addComment = async (postId,content) =>{
         console.log(postId,content);
-    await fetch('http://192.168.1.7:3000/comment/add',{
+    await fetch('http://192.168.1.8:3000/comment/add',{
       method:'POST',
       method:'POST',
       headers:{
@@ -134,7 +132,7 @@ ViewAllPosts=()=> {
 
   }
   getCommentWithPost= async(id)=>{
-    await fetch('http://192.168.1.7:3000/comment/post',{
+    await fetch('http://192.168.1.8:3000/comment/post',{
       method:'POST',
       method:'POST',
       headers:{
@@ -181,21 +179,6 @@ ViewAllPosts=()=> {
         
         <ScrollView>
          
-          <ImageBackground source={require("./Images/w2.jpg")}  style={styles.backgriundImage} >
-          <AwesomeAlert
-          show={this.state.showAlert}
-          showProgress={false}
-          title="Displaying your post"
-          message={`Your post is added`}
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={false}
-          showConfirmButton={true}
-          confirmText="OK"
-          confirmButtonColor="#DD6B55"
-          onConfirmPressed={() => {
-           this.setState({showAlert: false})
-          }}
-        />
             <View style={styles.Row2}>
           
               <Image source={require('./Images/p1.jpg')} style={styles.Profile}/>
@@ -227,10 +210,6 @@ ViewAllPosts=()=> {
                       <View style={{ paddingLeft: 10 }}>
                       <View style={styles.User}>
                       <Text style={styles.ppText}>Nourhan Magdy</Text></View>
-                      <View style={styles.Row}>
-                      <View style={styles.ppTime}>
-                      <Text style={styles.ppText}>1/13/2021</Text></View>
-                        </View>
                       </View>
                   </View>
                 </View>
@@ -242,9 +221,6 @@ ViewAllPosts=()=> {
               <View style={styles.Footer}>
               <View style={styles.FooterCount}>
                 <View style={styles.Row}></View>
-                    <View style={styles.TextCount}>
-                      <Text style={styles.ppText}>2k comments</Text>
-                    </View>
                 </View>
                 <View style={styles.Divider}/>
                 {/*
@@ -286,9 +262,6 @@ ViewAllPosts=()=> {
                               <Text style={styles.ppText}>Sara Samoul</Text>
                             </View>
                             <View style={styles.Row}>
-                              <View style={styles.Time}>
-                                <Text style={styles.ppText}>5 min. ago</Text>
-                              </View>
                             </View>
                           </View>
                         </View>
@@ -386,7 +359,6 @@ ViewAllPosts=()=> {
 
 			    </View>
       
-          </ImageBackground> 
         </ScrollView>
       
       );

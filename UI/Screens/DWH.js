@@ -146,7 +146,7 @@ componentDidMount(){
         <Image source={require('./Images/Data_Warehouse1.jpg')} style={styles.backgriundImage}>
         </Image>
         <View style={styles.Header}>
-          <Text style={styles.text}>About Artificial Intelligence Course</Text>
+          <Text style={styles.text}>About Data Warehouse Course</Text>
         </View>
         <View style={styles.inputTwo}>
           <View style={styles.inputThree}>
@@ -155,13 +155,12 @@ componentDidMount(){
             </View>
           </View>
           <View >
-            <Text >Artificial Intelligence (AI) is a rapidly advancing technology,
-            Made possible by the Internet, that may soon have significant impacts on our everyday lives.
-            AI traditionally refers to an artificial creation of human-like intelligence that can learn, R
-            eason, plan, perceive, or process natural language[1] .
-            These traits allow AI to bring immense socioeconomic opportunities,
-            while also posing ethical and socio-economic challenges.
-              As AI is an Internet enabled technology</Text>
+            <Text >
+            Data warehousing is the secure electronic storage of information by a business or other organization. The goal of data warehousing is to create a trove of historical data that can be retrieved and analyzed to provide useful insight into the organization's operations.
+
+            Data warehousing is a vital component of business intelligence. That wider term encompasses the information infrastructure that modern businesses use to track their past successes and failures and inform their decisions for the future.
+
+            </Text>
 
           </View>
 

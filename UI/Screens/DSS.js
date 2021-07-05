@@ -146,7 +146,7 @@ componentDidMount(){
         <Image source={require('./Images/DSS.jpg')} style={styles.backgriundImage}>
         </Image>
         <View style={styles.Header}>
-          <Text style={styles.text}>About Artificial Intelligence Course</Text>
+          <Text style={styles.text}>About Decision Support Systems Course</Text>
         </View>
         <View style={styles.inputTwo}>
           <View style={styles.inputThree}>
@@ -155,13 +155,12 @@ componentDidMount(){
             </View>
           </View>
           <View >
-            <Text >Artificial Intelligence (AI) is a rapidly advancing technology,
-            Made possible by the Internet, that may soon have significant impacts on our everyday lives.
-            AI traditionally refers to an artificial creation of human-like intelligence that can learn, R
-            eason, plan, perceive, or process natural language[1] .
-            These traits allow AI to bring immense socioeconomic opportunities,
-            while also posing ethical and socio-economic challenges.
-              As AI is an Internet enabled technology</Text>
+            <Text >
+            A decision support system (DSS) is a computerized program used to support determinations, judgments, and courses of action in an organization or a business. A DSS sifts through and analyzes massive amounts of data, compiling comprehensive information that can be used to solve problems and in decision-making.
+
+            Typical information used by a DSS includes target or projected revenue, sales figures or past ones from different time periods, and other inventory- or operations-related data.
+
+            </Text>
 
           </View>
 
@@ -216,13 +215,15 @@ renderItem={
             </View>
           </View>
           <View >
-            <Text >Artificial Intelligence (AI) is a rapidly advancing technology,
+            <Text >
+            Artificial Intelligence (AI) is a rapidly advancing technology,
             Made possible by the Internet, that may soon have significant impacts on our everyday lives.
             AI traditionally refers to an artificial creation of human-like intelligence that can learn, R
             eason, plan, perceive, or process natural language[1] .
             These traits allow AI to bring immense socioeconomic opportunities,
             while also posing ethical and socio-economic challenges.
-              As AI is an Internet enabled technology</Text>
+              As AI is an Internet enabled technology
+            </Text>
 
           </View>
 

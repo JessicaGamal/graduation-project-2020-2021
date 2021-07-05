@@ -216,7 +216,7 @@ console.log(answers)
     }
 
     return(
-        <ImageBackground source={require('./Images/gpa-calculator.jpg')} style={styles.backgriundImage}>
+        <ImageBackground source={require('./Images/Home.jpg')} style={styles.backgriundImage}>
         <AwesomeAlert
             show={showAlert}
             showProgress={false}
@@ -282,11 +282,16 @@ console.log(answers)
                 </View>
             </View>
             )}
-            {finished && <View style={styles.button}>
-                    <TouchableOpacity onPress={()=>calculate()}        >
-                    <Text>Calculate</Text>
+            {finished && 
+            <View style={{alignItems:"center", paddingTop: '75%'}}>
+                    <TouchableOpacity 
+                    onPress={()=>calculate()}
+                    style={styles.calculateButton}        
+                    >
+                    <Text style={{fontSize:21, fontWeight: 'bold'}}>Show Final Result</Text>
                     </TouchableOpacity>
-            </View>}
+            </View>
+            }
         </ImageBackground>
     );
     
@@ -314,7 +319,7 @@ const styles = StyleSheet.create({
     text:{
         fontWeight: 'bold',
         fontSize: 24,
-        color:'#000',
+        color:'#fff',
         fontStyle: 'italic',
         textShadowOffset:{width: 2, height: 2},
         textShadowRadius:20,
@@ -326,7 +331,7 @@ const styles = StyleSheet.create({
     Qtext:{
         fontWeight: 'bold',
         fontSize: 35,
-        color:'#01614E',
+        color:'#F9F9F9',
         fontStyle: 'italic',
         textShadowOffset:{width: 2, height: 2},
         textShadowRadius:20,
@@ -335,11 +340,11 @@ const styles = StyleSheet.create({
         marginTop: 200
     },
     buttonText:{
-        color:'#01614E',
+        color:'#000',
         fontSize: 22,
     },
     button: {
-        backgroundColor: '#fff',
+        backgroundColor: '#BFF0E6',
         width:"43%",
         borderRadius:25,
         height:50,
@@ -359,7 +364,7 @@ const styles = StyleSheet.create({
         marginBottom: 40,
     },
     startButtonText:{
-        color:'#333',
+        color:'#fff',
         fontStyle: 'italic',
         fontSize: 35,
     },
@@ -369,5 +374,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         justifyContent: "space-around",
     },
+    calculateButton:{
+        backgroundColor: '#BFF0E6',
+        width:"75%",
+        borderRadius:25,
+        height:70,
+        alignItems:"center",
+        justifyContent:"center",
+    }
     
   });

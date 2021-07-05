@@ -8,7 +8,7 @@ export default class  CoursesScreen extends React.Component {
       return (
         
         <ImageBackground
-          source={require("./Images/18.jpg")}
+          source={require("./Images/Home.jpg")}
           style={styles.backgriundImage}
         >
            
@@ -16,7 +16,7 @@ export default class  CoursesScreen extends React.Component {
            
       <View style={styles.titlestyle}>
             <Text style={styles.titletextstyle}>
-              Courses
+              ..Courses..
             </Text>
             </View>
             
@@ -83,7 +83,8 @@ export default class  CoursesScreen extends React.Component {
     },
    text:
    {
-     fontSize:20,color:"#333",
+   fontSize:20,
+   color:"#333",
    fontWeight:'bold',
    fontStyle:'italic'
   },
@@ -95,8 +96,7 @@ export default class  CoursesScreen extends React.Component {
       width: 200, 
       borderRadius: 15, 
       backgroundColor: "#A1DED2",
-      marginHorizontal:8,
-       marginVertical:20 
+      marginVertical:20 
     },
     
     titlestyle:
@@ -106,7 +106,7 @@ export default class  CoursesScreen extends React.Component {
       width: '100%', 
       padding:10 ,
       marginTop:20,
-      marginHorizontal:120,
+      alignItems : "center",
       
      
     },
@@ -114,9 +114,11 @@ export default class  CoursesScreen extends React.Component {
     titletextstyle:
     {
       fontWeight: 'bold',
-      fontSize: 40,
-      color:'#fff',
-      textDecorationLine: 'underline',
+      fontSize: 50,
+      color:'#DEDEDE',
+      textDecorationLine: 'none',
+      textShadowOffset:{width: 6, height: 6},
+      textShadowRadius:100,
       
     },
     

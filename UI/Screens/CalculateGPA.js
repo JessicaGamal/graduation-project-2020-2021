@@ -8,7 +8,7 @@ export default function CalculateGPA () {
   var a,b;
   //const [selectedValueOne, setSelectedValueOne] = useState('');
   const [gpa, setGpa] = useState();
- const [calculatedGPA, setCalculatedGPA] = useState(3)
+  const [calculatedGPA, setCalculatedGPA] = useState(3)
   const [hour, setHour] = useState();
   const [credit, setCredit] = useState([]);
   const [score, setScore] = useState([]);
@@ -36,10 +36,11 @@ export default function CalculateGPA () {
     })
     .then((response)=>response.json())
     .then(responsejson=>{
-      
-         setCalculatedGPA(JSON.stringify(responsejson))
+      /* 
+         setCalculatedGPA(responsejson)
          setShow(true)
-    
+      */
+      alert(JSON.stringify(responsejson));
     })
     }    
       
